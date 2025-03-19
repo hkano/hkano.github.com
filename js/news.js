@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newsSourceSelect = document.getElementById("news-source");
 
     // CORS Proxy to bypass restrictions
-    const CORS_PROXY = "https://api.allorigins.win/get?url=";
+    const CORS_PROXY = "https://api.allorigins.win/raw?url=";
 
     // RSS feed URLs
     const RSS_SOURCES = {
@@ -27,9 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-            // Parse JSON response (only needed when using a proxy)
-            const data = await response.json();
-            const xmlText = data.contents; // Extract the RSS XML from JSON
+            // Get XML response directly (no JSON parsing)
+            const xmlText = await response.text();
 
             const parser = new DOMParser();
             const xml = parser.parseFromString(xmlText, "text/xml");
