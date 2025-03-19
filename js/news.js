@@ -61,43 +61,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Extract image from RSS item
-    function getImageFromItem(item) {
-        console.log("Debugging RSS item:", item.outerHTML);
-
-        // 1. Check for <enclosure> tag (most reliable)
-        const enclosure = item.querySelector("enclosure");
-        if (enclosure && enclosure.getAttribute("url")) {
-            console.log("Found enclosure image:", enclosure.getAttribute("url"));
-            return enclosure.getAttribute("url");
-        }
-
-        // 2. Check for <media:thumbnail> (Japan Times specific)
+    async function getImageFromItem(item) {
+        // 1. Check for <media:thumbnail> (The Japan Times)
         const mediaThumbnail = item.querySelector("media\\:thumbnail, thumbnail");
         if (mediaThumbnail && mediaThumbnail.getAttribute("url")) {
-            console.log("Found media:thumbnail image:", mediaThumbnail.getAttribute("url"));
             return mediaThumbnail.getAttribute("url");
         }
 
-        // 3. Check for <media:content> (alternative image source)
+        // 2. Check for <media:content> (Alternative for The Japan Times)
         const mediaContent = item.querySelector("media\\:content, content");
         if (mediaContent && mediaContent.getAttribute("url")) {
-            console.log("Found media:content image:", mediaContent.getAttribute("url"));
             return mediaContent.getAttribute("url");
         }
 
-        // 4. Check for image inside description
+        // 3. Check for image inside <description> (Some sites embed images here)
         const description = item.querySelector("description")?.textContent || "";
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = description;
         const imgTag = tempDiv.querySelector("img");
         if (imgTag) {
-            console.log("Found image in description:", imgTag.getAttribute("src"));
             return imgTag.getAttribute("src");
         }
 
+        // 4. If NHK, Mainichi, or Japan Today, try fetching OGP image
+        const articleUrl = item.querySelector("link")?.textContent;
+        if (articleUrl && (articleUrl.includes("nhk.or.jp") || articleUrl.includes("mainichi.jp") || articleUrl.includes("japantoday.com"))) {
+            const ogImage = await fetchOGPImage(articleUrl);
+            if (ogImage) {
+                return ogImage;
+            }
+        }
+
         // 5. Return placeholder image if no image found
-        console.log("No image found, using placeholder");
         return DEFAULT_IMAGE;
+    }
+
+    // Fetch OGP image from an article page
+    async function fetchOGPImage(url) {
+        try {
+            const proxyUrl = "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+            const response = await fetch(proxyUrl);
+            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+            const htmlText = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, "text/html");
+            const ogImageMeta = doc.querySelector('meta[property="og:image"]');
+
+            return ogImageMeta ? ogImageMeta.getAttribute("content") : null;
+        } catch {
+            return null;
+        }
     }
 
     // Display news articles in the news container
