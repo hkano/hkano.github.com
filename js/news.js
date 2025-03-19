@@ -17,7 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fetch and parse RSS feed
     async function fetchNews(source) {
         try {
-            const response = await fetch(source);
+            // NHK does not require a CORS proxy, others do
+            const isNHK = source.includes("nhk.or.jp");
+            const url = isNHK ? source : CORS_PROXY + source;
+
+            const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
             const xmlText = await response.text();
