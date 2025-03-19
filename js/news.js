@@ -50,12 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Refreshes news based on the selected source
-    function refreshNews() {
-        const source = document.getElementById("news-source").value;
-        fetchNews(source);
-    }
-
     // Truncate long descriptions and add "Read more" link
     function truncateDescription(description, maxLength, link) {
         const tempDiv = document.createElement("div");
