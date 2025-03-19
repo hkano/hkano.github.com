@@ -162,11 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
             newsContainer.appendChild(article);
         });
     }
-
-    function refreshNews() {
-        const source = document.getElementById("news-source").value;
-        fetchNews(source);
-    }
     
     // Load default news source (NHK) when the page loads
     fetchNews(RSS_SOURCES.nhk);
