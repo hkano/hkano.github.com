@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newsSourceSelect = document.getElementById("news-source");
 
     // CORS Proxy to bypass restrictions
-    const CORS_PROXY = "https://thingproxy.freeboard.io/fetch/";
+    const CORS_PROXY = "https://api.allorigins.win/get?url=";
 
     // RSS feed URLs
     const RSS_SOURCES = {
@@ -22,16 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             // NHK does not require a CORS proxy, others do
             const isNHK = source.includes("nhk.or.jp");
-            const url = isNHK ? source : CORS_PROXY + source;
+            const url = isNHK ? source : CORS_PROXY + encodeURIComponent(source);
 
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
-            const xmlText = await response.text();
+            // Parse JSON response (only needed when using a proxy)
+            const data = await response.json();
+            const xmlText = data.contents; // Extract the RSS XML from JSON
+
             const parser = new DOMParser();
             const xml = parser.parseFromString(xmlText, "text/xml");
 
-            // Extract items from RSS feed
+            // Extract news items from the RSS feed
             const items = Array.from(xml.querySelectorAll("item")).map(item => ({
                 title: item.querySelector("title")?.textContent || "No title",
                 link: item.querySelector("link")?.textContent || "#",
@@ -69,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return DEFAULT_IMAGE;
     }
 
-    // Display news articles
+    // Display news articles in the news container
     function displayNews(items) {
         newsContainer.innerHTML = "";
         items.forEach(item => {
@@ -86,10 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Load default news source on page load
+    // Load default news source (NHK) when the page loads
     fetchNews(RSS_SOURCES.nhk);
 
-    // Refresh button event
+    // Refresh button event: Load selected news source
     refreshButton.addEventListener("click", () => {
         fetchNews(RSS_SOURCES[newsSourceSelect.value]);
     });
