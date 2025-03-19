@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const refreshButton = document.getElementById("refresh");
     const newsSourceSelect = document.getElementById("news-source");
 
+    // CORS Proxy to bypass restrictions
+    const CORS_PROXY = "https://thingproxy.freeboard.io/fetch/";
+
     // RSS feed URLs
     const RSS_SOURCES = {
         japanTimes: "https://www.japantimes.co.jp/rss/news",
