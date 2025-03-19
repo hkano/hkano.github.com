@@ -6,7 +6,7 @@
     <title>hkano.github.io</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
     <script src="https://unpkg.com/mithril/mithril.js"></script>
-    <script src="js/news.js" defer></script>
+
   </head>
   <body>
     <main class="container">
@@ -25,15 +25,17 @@
       <section id="news">
         <div>
           <label for="news-source">Select News Source:</label>
-          <select id="news-source" onchange="refreshNews()">
+          <select id="news-source">
             <option value="nhk">NHK World</option>
             <option value="japanTimes">Japan Times</option>
             <option value="japanToday">Japan Today</option>
             <option value="mainichi">The Mainichi</option>
           </select>
+          <button id="refresh">Refresh News</button>
         </div>
         <div id="news-container"></div>
       </section>
     </main>
+    <script src="js/news.js" defer></script>
   </body>
 </html>
