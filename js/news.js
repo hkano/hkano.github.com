@@ -62,39 +62,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract image from RSS item
     async function getImageFromItem(item) {
-        if (!(item instanceof Element)) {
-            console.error("Invalid itemElement passed to getImageFromItem:", item);
-            return "https://placehold.co/150x100?text=No+Image";
+        // 1. Check for `enclosure` tag
+        if (item.enclosure && item.enclosure.url) {
+            return item.enclosure.url;
         }
 
-        // 1. Check for <media:thumbnail>
-        const mediaThumbnail = item.querySelector("media\\:thumbnail, thumbnail");
-        if (mediaThumbnail && mediaThumbnail.getAttribute("url")) {
-            return mediaThumbnail.getAttribute("url");
+        // 2. Check for `media:thumbnail`
+        if (item["media:thumbnail"] && item["media:thumbnail"]["@url"]) {
+            return item["media:thumbnail"]["@url"];
         }
 
-        // 2. Check for <media:content>
-        const mediaContent = item.querySelector("media\\:content, content");
-        if (mediaContent && mediaContent.getAttribute("url")) {
-            return mediaContent.getAttribute("url");
+        // 3. Check for `media:content`
+        if (item["media:content"] && item["media:content"]["@url"]) {
+            return item["media:content"]["@url"];
         }
 
-        // 3. Check for image inside <description>
-        const description = item.querySelector("description")?.textContent || "";
+        // 4. Check for image inside `description`
         const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = description;
+        tempDiv.innerHTML = item.description || "";
         const imgTag = tempDiv.querySelector("img");
         if (imgTag) {
             return imgTag.getAttribute("src");
         }
 
-        // 4. Try fetching OGP image
-        const articleUrl = item.querySelector("link")?.textContent;
-        if (articleUrl && (articleUrl.includes("nhk.or.jp") || articleUrl.includes("mainichi.jp") || articleUrl.includes("japantoday.com"))) {
-            return await fetchOGPImage(articleUrl);
+        // 5. Fetch OGP image
+        if (item.link && (item.link.includes("nhk.or.jp") || item.link.includes("mainichi.jp") || item.link.includes("japantoday.com"))) {
+            return await fetchOGPImage(item.link);
         }
 
-        // 5. Return placeholder image if no image found
+        // 6. Return placeholder image if no image found
         return DEFAULT_IMAGE;
     }
 
@@ -110,9 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = parser.parseFromString(htmlText, "text/html");
             const ogImageMeta = doc.querySelector('meta[property="og:image"]');
 
-            return ogImageMeta ? ogImageMeta.getAttribute("content") : null;
+            return ogImageMeta ? ogImageMeta.getAttribute("content") : DEFAULT_IMAGE;
         } catch {
-            return null;
+            return DEFAULT_IMAGE;
         }
     }
 
@@ -122,8 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (const item of items) {
             const article = document.createElement("article");
-        
-            // Ensure we wait for the image to be retrieved
+
+            // Ensure we wait for the image to be retrieved before setting the src
             const imageUrl = await getImageFromItem(item);
 
             article.innerHTML = `
