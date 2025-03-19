@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // RSS feed URLs
     const RSS_SOURCES = {
-        japanTimes: "https://www.japantimes.co.jp/rss/news",
         nhk: "https://www3.nhk.or.jp/rss/news/cat0.xml",
-        mainichi: "https://mainichi.jp/rss/etc/mainichi-flash.rss",
-        japanToday: "https://japantoday.com/feed"
+        japanTimes: "https://www.japantimes.co.jp/feed/",
+        japanToday: "https://japantoday.com/feed",
+        mainichi: "https://mainichi.jp/rss/etc/mainichi-flash.rss"
     };
 
     // Placeholder image
