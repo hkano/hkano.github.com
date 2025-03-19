@@ -62,12 +62,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract image from RSS item
     function getImageFromItem(item) {
+        // 1. Check for enclosure tag (most reliable)
         const enclosure = item.querySelector("enclosure");
         if (enclosure && enclosure.getAttribute("url")) {
             return enclosure.getAttribute("url");
         }
-        const imgMatch = item.querySelector("description")?.textContent.match(/<img.*?src=["'](.*?)["']/);
-        if (imgMatch && imgMatch[1]) return imgMatch[1];
+
+        // 2. Check for image inside description
+        const description = item.querySelector("description")?.textContent || "";
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = description;
+        const imgTag = tempDiv.querySelector("img");
+        if (imgTag) {
+            return imgTag.getAttribute("src");
+        }
+
+        // 3. Return placeholder image if no image found
         return DEFAULT_IMAGE;
     }
 
