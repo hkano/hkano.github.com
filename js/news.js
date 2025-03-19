@@ -62,19 +62,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract image from RSS item
     async function getImageFromItem(item) {
-        // 1. Check for `enclosure` tag
+        // 1. Check for `media:thumbnail`
+        if (item["media:thumbnail"] && item["media:thumbnail"].url) {
+            return item["media:thumbnail"].url;
+        }
+
+        // 2. Check for `media:content`
+        if (item["media:content"] && item["media:content"].url) {
+            return item["media:content"].url;
+        }  
+        
+        // 3. Check for `enclosure` tag
         if (item.enclosure && item.enclosure.url) {
             return item.enclosure.url;
-        }
-
-        // 2. Check for `media:thumbnail`
-        if (item["media:thumbnail"] && item["media:thumbnail"]["@url"]) {
-            return item["media:thumbnail"]["@url"];
-        }
-
-        // 3. Check for `media:content`
-        if (item["media:content"] && item["media:content"]["@url"]) {
-            return item["media:content"]["@url"];
         }
 
         // 4. Check for image inside `description`
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 5. Fetch OGP image
-        if (item.link && (item.link.includes("nhk.or.jp") || item.link.includes("mainichi.jp") || item.link.includes("japantoday.com"))) {
+        if (item.link) {
             return await fetchOGPImage(item.link);
         }
 
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const imageUrl = await getImageFromItem(item);
 
             article.innerHTML = `
-                <img src="${imageUrl}" alt="News Image" style="max-width: 100%; height: auto;">
+                <img src="${imageUrl}" alt="News Image" style="max-width: 150px; height: auto; object-fit: cover; border-radius: 8px;">
                 <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
                 <p>${item.description}</p>
                 <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
