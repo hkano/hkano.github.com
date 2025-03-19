@@ -24,13 +24,12 @@
       <section id="news">
         <div>
           <label for="news-source">Select News Source:</label>
-          <select id="news-source">
+          <select id="news-source" onchange="refreshNews()">
             <option value="nhk">NHK World</option>
             <option value="japanTimes">Japan Times</option>
             <option value="japanToday">Japan Today</option>
             <option value="mainichi">The Mainichi</option>
           </select>
-          <button id="refresh">Refresh News</button>
         </div>
         <div id="news-container"></div>
       </section>
