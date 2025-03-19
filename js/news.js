@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function displayNews(items) {
         newsContainer.innerHTML = "";
 
-        for (const item of items) {
+        items.forEach((item, index) => {
             const article = document.createElement("article");
 
             if (index < 10) {
