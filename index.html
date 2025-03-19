@@ -23,8 +23,33 @@
       </section>
       <section id="news">
         <h2>Japan News</h2>
-        <button id="refresh">Refresh News</button>
-        <ul id="news-list"></ul>
+        <div>
+          <label for="news-source">Select News Source:</label>
+          <select id="news-source">
+            <option value="japanTimes">Japan Times</option>
+            <option value="nhk">NHK World</option>
+            <option value="mainichi">The Mainichi</option>
+            <option value="japanToday">Japan Today</option>
+          </select>
+          <button id="refresh">Refresh News</button>
+        </div>
+        <div>
+          <label for="search-keyword">Search:</label>
+          <input type="text" id="search-keyword" placeholder="Enter keyword">
+        </div>
+        <div>
+          <label for="sort-order">Sort by:</label>
+          <select id="sort-order">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+        <div id="news-container"></div>
+        <div class="pagination">
+          <button id="prev-page" class="button" disabled>Previous</button>
+          <span id="page-info"></span>
+          <button id="next-page" class="button" disabled>Next</button>
+        </div>
       </section>
     </main>
   </body>
