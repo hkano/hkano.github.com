@@ -62,22 +62,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract image from RSS item
     function getImageFromItem(item) {
-        // 1. Check for enclosure tag (most reliable)
+        console.log("Debugging RSS item:", item.outerHTML);
+
+        // 1. Check for <enclosure> tag (most reliable)
         const enclosure = item.querySelector("enclosure");
         if (enclosure && enclosure.getAttribute("url")) {
+            console.log("Found enclosure image:", enclosure.getAttribute("url"));
             return enclosure.getAttribute("url");
         }
 
-        // 2. Check for image inside description
+        // 2. Check for <media:thumbnail> (Japan Times specific)
+        const mediaThumbnail = item.querySelector("media\\:thumbnail, thumbnail");
+        if (mediaThumbnail && mediaThumbnail.getAttribute("url")) {
+            console.log("Found media:thumbnail image:", mediaThumbnail.getAttribute("url"));
+            return mediaThumbnail.getAttribute("url");
+        }
+
+        // 3. Check for <media:content> (alternative image source)
+        const mediaContent = item.querySelector("media\\:content, content");
+        if (mediaContent && mediaContent.getAttribute("url")) {
+            console.log("Found media:content image:", mediaContent.getAttribute("url"));
+            return mediaContent.getAttribute("url");
+        }
+
+        // 4. Check for image inside description
         const description = item.querySelector("description")?.textContent || "";
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = description;
         const imgTag = tempDiv.querySelector("img");
         if (imgTag) {
+            console.log("Found image in description:", imgTag.getAttribute("src"));
             return imgTag.getAttribute("src");
         }
 
-        // 3. Return placeholder image if no image found
+        // 5. Return placeholder image if no image found
+        console.log("No image found, using placeholder");
         return DEFAULT_IMAGE;
     }
 
