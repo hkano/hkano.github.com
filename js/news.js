@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Placeholder image
-    const DEFAULT_IMAGE = "https://placehold.co/150x100?text=No+Image";
+    const DEFAULT_LOADING_IMAGE = "https://placehold.co/150x100?text=Loading";
+    const DEFAULT_NO_IMAGE = "https://placehold.co/150x100?text=No+Image";
 
     // Fetch and parse RSS feed
     async function fetchNews(source) {
@@ -91,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // 6. Return placeholder image if no image found
-        return DEFAULT_IMAGE;
+        return DEFAULT_NO_IMAGE;
     }
 
     // Fetch OGP image from an article page
@@ -106,9 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = parser.parseFromString(htmlText, "text/html");
             const ogImageMeta = doc.querySelector('meta[property="og:image"]');
 
-            return ogImageMeta ? ogImageMeta.getAttribute("content") : DEFAULT_IMAGE;
+            return ogImageMeta ? ogImageMeta.getAttribute("content") : DEFAULT_NO_IMAGE;
         } catch {
-            return DEFAULT_IMAGE;
+            return DEFAULT_NO_IMAGE;
         }
     }
 
@@ -119,17 +120,25 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const item of items) {
             const article = document.createElement("article");
 
-            // Ensure we wait for the image to be retrieved before setting the src
-            const imageUrl = await getImageFromItem(item);
+            // Placeholder image until the real image is loaded
+            const imageElement = document.createElement("img");
+            imageElement.src = DEFAULT_LOADING_IMAGE;
+            imageElement.alt = "News Image";
+            imageElement.style = "max-width: 150px; height: auto; object-fit: cover; border-radius: 8px;";
 
             article.innerHTML = `
-                <img src="${imageUrl}" alt="News Image" style="max-width: 150px; height: auto; object-fit: cover; border-radius: 8px;">
                 <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
                 <p>${item.description}</p>
                 <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
             `;
 
+            article.insertBefore(imageElement, article.firstChild);
             newsContainer.appendChild(article);
+
+            // Load the actual image asynchronously
+            getImageFromItem(item).then((imageUrl) => {
+                imageElement.src = imageUrl;
+            });
         }
     }
 
