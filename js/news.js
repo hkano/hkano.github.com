@@ -62,19 +62,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Extract image from RSS item
     async function getImageFromItem(item) {
-        // 1. Check for <media:thumbnail> (The Japan Times)
+        if (!(item instanceof Element)) {
+            console.error("Invalid itemElement passed to getImageFromItem:", item);
+            return "https://placehold.co/150x100?text=No+Image";
+        }
+
+        // 1. Check for <media:thumbnail>
         const mediaThumbnail = item.querySelector("media\\:thumbnail, thumbnail");
         if (mediaThumbnail && mediaThumbnail.getAttribute("url")) {
             return mediaThumbnail.getAttribute("url");
         }
 
-        // 2. Check for <media:content> (Alternative for The Japan Times)
+        // 2. Check for <media:content>
         const mediaContent = item.querySelector("media\\:content, content");
         if (mediaContent && mediaContent.getAttribute("url")) {
             return mediaContent.getAttribute("url");
         }
 
-        // 3. Check for image inside <description> (Some sites embed images here)
+        // 3. Check for image inside <description>
         const description = item.querySelector("description")?.textContent || "";
         const tempDiv = document.createElement("div");
         tempDiv.innerHTML = description;
@@ -83,13 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return imgTag.getAttribute("src");
         }
 
-        // 4. If NHK, Mainichi, or Japan Today, try fetching OGP image
+        // 4. Try fetching OGP image
         const articleUrl = item.querySelector("link")?.textContent;
         if (articleUrl && (articleUrl.includes("nhk.or.jp") || articleUrl.includes("mainichi.jp") || articleUrl.includes("japantoday.com"))) {
-            const ogImage = await fetchOGPImage(articleUrl);
-            if (ogImage) {
-                return ogImage;
-            }
+            return await fetchOGPImage(articleUrl);
         }
 
         // 5. Return placeholder image if no image found
