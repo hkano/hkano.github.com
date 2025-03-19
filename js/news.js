@@ -115,20 +115,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Display news articles in the news container
-    function displayNews(items) {
+    async function displayNews(items) {
         newsContainer.innerHTML = "";
-        items.forEach(item => {
+
+        for (const item of items) {
             const article = document.createElement("article");
+        
+            // Ensure we wait for the image to be retrieved
+            const imageUrl = await getImageFromItem(item);
 
             article.innerHTML = `
-                <img src="${item.image}" alt="News Image" style="max-width: 100%; height: auto;">
+                <img src="${imageUrl}" alt="News Image" style="max-width: 100%; height: auto;">
                 <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
                 <p>${item.description}</p>
                 <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
             `;
 
             newsContainer.appendChild(article);
-        });
+        }
     }
 
     // Load default news source (NHK) when the page loads
