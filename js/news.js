@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("search-keyword");
     const sortOrderSelect = document.getElementById("sort-order");
 
-    // RSS feed URLs for different news sources
+    // RSS feed URLs
     const RSS_SOURCES = {
         japanTimes: "https://www.japantimes.co.jp/rss/news",
         nhk: "https://www3.nhk.or.jp/rss/news/cat0.xml",
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Default placeholder image
-    const DEFAULT_IMAGE = "https://via.placeholder.com/150?text=No+Image";
+    const DEFAULT_IMAGE = "https://placehold.co/150x100?text=No+Image";
 
     // Pagination & filtering variables
     const ITEMS_PER_PAGE = 10;
@@ -29,25 +29,38 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fetch and parse RSS feed
     async function fetchNews(source) {
         try {
-            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source)}`);
-            const data = await response.json();
-            allNewsItems = data.items;
-            filterAndSortNews(); // Apply filters and sorting on initial load
+            const response = await fetch(source);
+            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+            const xmlText = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(xmlText, "text/xml");
+
+            // Extract items from RSS feed
+            allNewsItems = Array.from(xml.querySelectorAll("item")).map(item => ({
+                title: item.querySelector("title")?.textContent || "No title",
+                link: item.querySelector("link")?.textContent || "#",
+                pubDate: new Date(item.querySelector("pubDate")?.textContent || Date.now()),
+                description: item.querySelector("description")?.textContent || "No description",
+                image: getImageFromItem(item)
+            }));
+
+            // Apply filtering and sorting
+            filterAndSortNews();
         } catch (error) {
-            console.error("Failed to load news", error);
+            console.error("Failed to fetch RSS:", error);
             newsContainer.innerHTML = "<p>Failed to load news. Please try again later.</p>";
         }
     }
 
     // Extract image from RSS item
     function getImageFromItem(item) {
-        if (item.enclosure && item.enclosure.link) {
-            return item.enclosure.link;
+        const enclosure = item.querySelector("enclosure");
+        if (enclosure && enclosure.getAttribute("url")) {
+            return enclosure.getAttribute("url");
         }
-        const imgMatch = item.description.match(/<img.*?src=["'](.*?)["']/);
-        if (imgMatch && imgMatch[1]) {
-            return imgMatch[1];
-        }
+        const imgMatch = item.querySelector("description")?.textContent.match(/<img.*?src=["'](.*?)["']/);
+        if (imgMatch && imgMatch[1]) return imgMatch[1];
         return DEFAULT_IMAGE;
     }
 
@@ -74,13 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         // Sort by date
-        filteredNewsItems.sort((a, b) => {
-            const dateA = new Date(a.pubDate);
-            const dateB = new Date(b.pubDate);
-            return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
-        });
+        filteredNewsItems.sort((a, b) => sortOrder === "newest" ? b.pubDate - a.pubDate : a.pubDate - b.pubDate);
 
-        // Update pagination
+        // Reset pagination
         currentPage = 1;
         totalPages = Math.ceil(filteredNewsItems.length / ITEMS_PER_PAGE);
         displayNews();
@@ -95,13 +104,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         paginatedItems.forEach(item => {
             const article = document.createElement("article");
-            const imageUrl = getImageFromItem(item);
 
             article.innerHTML = `
-                <img src="${imageUrl}" alt="News Image" style="max-width: 100%; height: auto;">
+                <img src="${item.image}" alt="News Image" style="max-width: 100%; height: auto;">
                 <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-                <p>${truncateDescription(item.description, 150, item.link)}</p>
-                <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
+                <p>${truncateDescription(item.description, 150, item.link) || "No description available."}</p>
+                <p><small>${item.pubDate.toLocaleDateString()}</small></p>
             `;
 
             newsContainer.appendChild(article);
