@@ -120,26 +120,41 @@ document.addEventListener("DOMContentLoaded", () => {
         for (const item of items) {
             const article = document.createElement("article");
 
-            // Placeholder image until the real image is loaded
-            const imageElement = document.createElement("img");
-            imageElement.src = DEFAULT_LOADING_IMAGE;
-            imageElement.alt = "News Image";
-            imageElement.style = "max-width: 150px; height: auto; object-fit: cover; border-radius: 8px;";
+            if (index < 10) {
+                // Display image for the first 10 items
+                const imageElement = document.createElement("img");
+                imageElement.src = DEFAULT_LOADING_IMAGE;
+                imageElement.alt = "News Image";
+                imageElement.style = "max-width: 150px; height: auto; object-fit: cover; border-radius: 8px;";
 
-            article.innerHTML = `
-                <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-                <p>${item.description}</p>
-                <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
-            `;
+                article.innerHTML = `
+                    <h3>
+                        <a href="${item.link}" target="_blank">${item.title}</a>
+                    </h3>
+                    <p>${item.description}</p>
+                    <p><small>${new Date(item.pubDate).toLocaleDateString()}</small></p>
+                `;
 
-            article.insertBefore(imageElement, article.firstChild);
+                article.insertBefore(imageElement, article.firstChild);
+                newsContainer.appendChild(article);
+            
+                // Load the actual image asynchronously
+                getImageFromItem(item).then((imageUrl) => {
+                    imageElement.src = imageUrl;
+                });
+
+            } else {
+                // Design change for items beyond the 10th item (no image, compact layout)
+                article.innerHTML = `
+                    <h4 style="font-size: 14px; margin-bottom: 4px;">
+                       <a href="${item.link}" target="_blank">${item.title}</a>
+                    </h4>
+                    <p style="font-size: 12px; color: gray;">${new Date(item.pubDate).toLocaleDateString()}</p>
+                `;
+            }
+
             newsContainer.appendChild(article);
-
-            // Load the actual image asynchronously
-            getImageFromItem(item).then((imageUrl) => {
-                imageElement.src = imageUrl;
-            });
-        }
+        });
     }
 
     // Load default news source (NHK) when the page loads
