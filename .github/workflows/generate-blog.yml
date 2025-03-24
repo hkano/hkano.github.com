@@ -1,0 +1,35 @@
+name: Generate Blog
+
+on:
+  push:
+    paths:
+      - 'articles/**/*.md'
+      - 'scripts/generate.js'
+      - 'templates/**'
+      - '.github/workflows/generate-blog.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install gray-matter marked fs-extra glob
+
+      - name: Run blog generator
+        run: node scripts/generate.js
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "chore: auto-generate blog pages" || echo "No changes to commit"
+          git push
