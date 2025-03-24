@@ -6,7 +6,7 @@ title: 北陸の方に旅行してきた
 
 **【8/23（一日目）】**
 
-![北陸旅行一日目の白川郷](/images/2009-08-23-first-day-of-the-trip-to-hokuriku.jpg
+![北陸旅行一日目の白川郷](/images/2009-08-23-first-day-of-the-trip-to-hokuriku.jpg)
 
 東京駅→越後湯沢駅→富山駅→富山IC→白川郷IC→白川郷
 
