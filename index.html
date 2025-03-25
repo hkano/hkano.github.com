@@ -2,190 +2,29 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>hkano.com</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
   <link rel="stylesheet" href="/css/custom.css" />
   <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png" />
   <link rel="apple-touch-icon" href="/logo-192.png" />
-  <link rel="icon" sizes="192x192" href="/logo-192.png" />
 </head>
 <body>
-  <header class="site-header">
-  <div class="site-brand">
-    <h1 class="brand-group">
-      <a href="https://hkano.com" class="brand-link">
-        <img src="/images/logo.png" alt="hkano.com" class="site-logo" />
-        <span class="site-title">hkano.com</span>
-      </a>
-    </h1>
-  </div>
-  <div class="menu">
-    |
-    <a href="https://hkano.com">Top</a>
-    |
-    <a href="https://x.com/hkano" target="_blank">X</a>
-    |
-    <a href="https://www.facebook.com/kano.hideaki" target="_blank">Facebook</a>
-    |
-    <a href="https://www.instagram.com/hkano_/" target="_blank">Instagram</a>
-    |
-    <a href="https://note.mu/hkano" target="_blank">note</a>
-    |
-  </div>
-</header>
+  {% include "partials/header.html" %}
 
+  {% for article in articles %}
+    <article class="article-card">
+      <h2 class="article-title">
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      </h2>
+      <div class="article-body">
+        {{ article.content }}
+      </div>
+      <div class="article-date">Date: {{ article.date }}</div>
+    </article>
+  {% endfor %}
 
-  <main class="container">
-    <section class="article-list">
-      
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2013/11/announcing-our-marriage.html">結婚報告</a></h2>
-      <p>結婚しました。いい夫婦の日です。</p>
-<p><img src="/images/2013-latte-art-announcing-our-marriage.jpg" alt="結婚報告のラテアート"></p>
-
-      <small>2013/11/22</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2013/10/from-iPhone-5s.html">iPhone 5sから</a></h2>
-      <p>テストだよ！</p>
-<p><img src="/images/2013-10-03-a-special-bromide-card-from-the-collaboration-between-IkaMusume-and-Yocchan.jpg" alt="「カットよっちゃん×侵略！イカ娘」スペシャルブロマイドカード"></p>
-
-      <small>2013/10/03</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2012/03/sightseeing-in-Osaka.html">大阪観光</a></h2>
-      <p>昨日は大阪で仕事でした。今日は大阪観光してます。</p>
-<p><img src="/images/2012-03-11-sightseeing-in-Osaka.jpg" alt="大阪の新世界と通天閣"></p>
-
-      <small>2012/03/11</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2010/09/the-trip-to-China.html">中国旅行</a></h2>
-      <p>昨日まで北京にいました。今日から上海に来ています。上海万博を見ました。</p>
-<p><img src="/images/2010-09-09-the-trip-to-China.jpg" alt="上海万博ののマスコット「海宝（ハイバオ）」"></p>
-
-      <small>2010/09/09</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2009/08/the-trip-to-hokuriku.html">北陸の方に旅行してきた</a></h2>
-      <p>23日から25日まで。2泊3日。</p>
-<p><strong>【8/23（一日目）】</strong></p>
-<p><img src="/images/2009-08-23-first-day-of-the-trip-to-hokuriku.jpg" alt="北陸旅行一日目の白川郷"></p>
-<p>東京駅→越後湯沢駅→富山駅→富山IC→白川郷IC→白川郷</p>
-<p>・東京駅一時間前集合で暇。
-・越後湯沢駅の乗換時間は僅か6分。
-・富山駅レンタカー屋の否定的な言動。
-・意外と遠い白川郷。18時前着しないと晩飯抜き。
-・何とか17時半に白川郷着。
-・意外とふれあいの無い民宿。
-・既に殆どの店が閉店。
-・晩飯は旨い。
-・夜に出歩いたら真暗。
-・風呂は共用檜風呂。
-・民宿のルールで22時就寝。</p>
-<p><strong>【8/24（二日目）】</strong></p>
-<p><img src="/images/2009-08-24-second-day-of-the-trip-to-hokuriku.jpg" alt="北陸旅行二日目の松井秀喜ベースボールミュージアム"></p>
-<p>白川郷→白山スーパー林道→小松市→小松空港→安宅の関→松井秀喜ミュージアム→
-那谷寺→吉田屋山王閣（山代温泉）</p>
-<p>・6時半起床。ラジオ体操。朝の散歩。
-・朝飯は旨い。
-・白川郷を観光。夜と違って活気あり。
-・全ての建物が合掌造りという訳では無い。
-・展望台を目指して山登り。
-・3時間くらいで白川郷を満喫。
-・石川県を目指してスーパー林道を移動。
-・スーパー林道ってか山道。
-・スーパー林道を抜けても山道。
-・2時間半くらいで小松市到着。
-・用は無いけど小松空港に立ち寄る。
-・安宅の関の商売魂。
-・僻地にある松井秀喜ミュージアム。
-・那谷寺は時間いっぱいタイムアウト。
-・山王閣に到着。
-・晩飯は旨い。
-・祭りに参加。うまい棒をゲット。
-・山代温泉を堪能。風呂は（たまたま）貸切。
-・だらだらして25時くらいに就寝。</p>
-<p>【8/25（最終日）】</p>
-<p><img src="/images/2009-08-25-last-day-of-the-trip-to-hokuriku.jpg" alt="北陸旅行三日目の兼六園"></p>
-<p>山王閣→金沢市→兼六園→近江町市場→金沢城→金沢駅→越後湯沢駅→東京駅</p>
-<p>・7時50分起床。
-・朝飯は旨い。
-・金沢市に移動。
-・三大名園の兼六園。
-・近江町市場に移動。
-・昼飯は旨い。
-・何となく金沢城見学。
-・金沢駅に移動。
-・帰路。</p>
-<p>総じて移動の多い旅だった。</p>
-
-      <small>2009/08/25</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2009/08/last-day-of-the-trip-to-South-Korea.html">韓国旅行三日目</a></h2>
-      <p><img src="/images/2009-08-09-last-day-of-the-trip-to-South-Korea.jpg" alt="韓国旅行三日目の羽田空港"></p>
-<p>既に羽田なう。</p>
-<p>今日の韓国はマジ暑かった。
-冷麺を食べた。
-タクシーの運転が怖かった。</p>
-<p>楽しかったです。良い旅でした。</p>
-
-      <small>2009/08/09</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2009/08/second-day-of-the-trip-to-South-Korea.html">韓国旅行二日目</a></h2>
-      <p><img src="/images/2009-08-08-second-day-of-the-trip-to-South-Korea.jpg" alt="韓国旅行二日目の仁川ワールドカップ競技場"></p>
-<p>世界遺産の宮廷に行った。
-参鶏湯を食べた。
-サッカーを観た。圧勝だった。
-仁川は遠かった。乗り換えを間違えた。
-今日も焼肉を食べた。</p>
-
-      <small>2009/08/08</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2009/08/first-day-of-the-trip-to-South-Korea.html">韓国旅行一日目</a></h2>
-      <p><img src="/images/2009-08-07-first-day-of-the-trip-to-South-Korea.jpg" alt="韓国旅行一日目の焼肉"></p>
-<p>ソウルタワーに行ってきました。
-明洞で焼肉たべました。
-明日はサッカーです。</p>
-
-      <small>2009/08/07</small>
-    </div>
-  
-
-    <div class="article-card">
-      <h2 class="article-title"><a href="/posts/2009/01/the-first-shrine-visit-of-the-year.html">こんにちは！こんにちは！</a></h2>
-      <p>こんにちは！こんにちは！</p>
-<p><img src="/images/2009-01-01-the-first-shrine-visit-of-the-year.jpg" alt="2009年の初詣"></p>
-
-      <small>2009/01/01</small>
-    </div>
-  
-    </section>
-  </main>
-
-  <footer id="foot">
-  <div class="copyright">
-    © hkano.com 2009 -
-  </div>
-</footer>
-
+  {% include "partials/footer.html" %}
 </body>
 </html>
