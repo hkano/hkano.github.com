@@ -15,6 +15,45 @@
   text-decoration: underline;
 }
 
+.site-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+}
+
+/* List of articles shown on top page */
+.article-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.article-card {
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.article-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.article-card p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.article-card small {
+  display: block;
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
 .article-title {
   font-size: 1.8rem;
   margin-top: 2rem;
@@ -34,7 +73,7 @@
   margin-bottom: 3rem;
 }
 
-/* Prevent oversized images and center them */
+/* Prevent image overflow and center them */
 .article-body img {
   display: block;
   margin: 2rem auto;
@@ -44,7 +83,6 @@
   height: auto;
 }
 
-/* Copyright footer spacing and style */
 footer#foot {
   text-align: center;
   font-size: 0.8rem;
