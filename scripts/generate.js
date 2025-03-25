@@ -43,8 +43,8 @@ for (const article of articles) {
   const html = layoutTemplate
     .replace("{{ header }}", header)
     .replace("{{ footer }}", footer)
-    .replace("{{ title }}", article.title)
-    .replace("{{ date }}", article.date)
+    .replaceAll("{{ title }}", article.title)
+    .replaceAll("{{ date }}", article.date)
     .replace("{{ content }}", article.html);
   fs.writeFileSync(outPath, html);
 }
