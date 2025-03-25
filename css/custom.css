@@ -1,8 +1,15 @@
-.menu {
+.site-header {
   text-align: center;
-  padding: 1rem 0;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #eee;
+  margin: 2rem 0;
+}
+
+.site-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  font-size: 0.95rem;
 }
 
 .menu a {
@@ -15,13 +22,6 @@
   text-decoration: underline;
 }
 
-.site-title {
-  text-align: center;
-  font-size: 2rem;
-  margin: 2rem 0 1rem;
-}
-
-/* List of articles shown on top page */
 .article-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -73,7 +73,6 @@
   margin-bottom: 3rem;
 }
 
-/* Prevent image overflow and center them */
 .article-body img {
   display: block;
   margin: 2rem auto;
