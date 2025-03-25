@@ -1,36 +1,36 @@
 body {
-  font-size: 1.875rem;
-  line-height: 2;
+  font-size: 21px;
+  line-height: 1.9;
 }
 
 .site-header {
   text-align: center;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
 .site-brand {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .site-logo {
-  height: 64px;
+  height: 40px;
   width: auto;
 }
 
 .site-title {
-  font-size: 2.6rem;
+  font-size: 2.2rem;
 }
 
 .menu {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .menu a {
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   text-decoration: none;
   color: #333;
 }
@@ -42,32 +42,32 @@ body {
 .article-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
 .article-card {
-  padding: 2.5rem;
+  padding: 2rem;
   border: 1px solid #eee;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  font-size: 1.875rem;
-  line-height: 2;
+  font-size: 1.15rem;
+  line-height: 1.9;
 }
 
 .article-card h1,
 .article-card h2,
 .article-card h3,
 .article-title {
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   margin-top: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .article-card p,
 .article-body p {
-  margin: 1.5rem 0;
-  font-size: 1.875rem;
+  margin: 1rem 0;
+  font-size: 1.15rem;
 }
 
 .article-card img,
@@ -77,28 +77,28 @@ body {
   max-width: 100%;
   height: auto;
   width: auto;
-  max-height: 560px;
+  max-height: 480px;
 }
 
 .article-card small,
 .article-date {
   display: block;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   color: #777;
   text-align: right;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .article-body {
-  font-size: 1.875rem;
-  line-height: 2;
-  margin-bottom: 3rem;
+  line-height: 1.9;
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
 }
 
 footer#foot {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 0.85rem;
   color: #999;
-  margin-top: 4rem;
-  padding-bottom: 3rem;
+  margin-top: 3rem;
+  padding-bottom: 2rem;
 }
