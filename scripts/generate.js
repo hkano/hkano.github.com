@@ -20,22 +20,27 @@ for (const file of files) {
   const filePath = path.join(articlesDir, file);
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
-  const slug = path.basename(file, '.md');
+  const htmlContent = marked(content);
+
+  const filename = path.basename(file, '.md');
+  const [year, month, slug] = filename.split('-');
+
+  const outputPath = path.join(postsDir, `${year}/${month}/${slug}.html`);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
   const html = nunjucks.render('post.html', {
     title: data.title,
-    date: data.date,
-    content: marked(content)
+    date: `${year}/${month}`,
+    content: htmlContent
   });
 
-  const outputPath = path.join(postsDir, `${data.date.slice(0, 4)}/${data.date.slice(5, 7)}/${slug}.html`);
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, html);
 
   allArticles.push({
     title: data.title,
-    date: data.date,
-    content: marked(content)
+    date: `${year}/${month}`,
+    content: htmlContent,
+    url: `/posts/${year}/${month}/${slug}.html`
   });
 }
 
