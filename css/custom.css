@@ -1,5 +1,5 @@
 body {
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.9;
 }
 
@@ -22,15 +22,15 @@ body {
 }
 
 .site-title {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
 }
 
 .menu {
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 
 .menu a {
-  margin: 0 0.5rem;
+  margin: 0 0.75rem;
   text-decoration: none;
   color: #333;
 }
@@ -51,7 +51,7 @@ body {
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   line-height: 1.9;
 }
 
@@ -59,7 +59,7 @@ body {
 .article-card h2,
 .article-card h3,
 .article-title {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -67,7 +67,7 @@ body {
 .article-card p,
 .article-body p {
   margin: 1rem 0;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
 
 .article-card img,
@@ -83,7 +83,7 @@ body {
 .article-card small,
 .article-date {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #777;
   text-align: right;
   margin-top: 1rem;
@@ -91,13 +91,13 @@ body {
 
 .article-body {
   line-height: 1.9;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   margin-bottom: 2rem;
 }
 
 footer#foot {
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: #999;
   margin-top: 3rem;
   padding-bottom: 2rem;
