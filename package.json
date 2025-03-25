@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "nunjucks": "^3.2.4",
+    "fs-extra": "^11.3.0",
+    "glob": "^10.4.5",
     "gray-matter": "^4.0.3",
-    "marked": "^9.0.3"
+    "marked": "^9.1.6",
+    "nunjucks": "^3.2.4"
   }
 }
