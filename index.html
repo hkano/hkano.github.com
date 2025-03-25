@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>hkano.com</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="/css/custom.css" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png" />
-  <link rel="apple-touch-icon" href="/logo-192.png" />
-</head>
-<body>
-  {% include "partials/header.html" %}
+{% extends "layout.html" %}
 
+{% block title %}hkano.com{% endblock %}
+
+{% block content %}
   {% for article in articles %}
     <article class="article-card">
       <h2 class="article-title">
@@ -24,7 +14,4 @@
       <div class="article-date">Date: {{ article.date }}</div>
     </article>
   {% endfor %}
-
-  {% include "partials/footer.html" %}
-</body>
-</html>
+{% endblock %}
