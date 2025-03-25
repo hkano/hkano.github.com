@@ -38,7 +38,7 @@ a:hover {
 
 .site-brand {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
@@ -47,6 +47,7 @@ a:hover {
 .site-logo {
   height: 64px;
   width: auto;
+  display: block;
 }
 
 .site-title {
