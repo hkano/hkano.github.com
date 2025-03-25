@@ -29,9 +29,9 @@ const articles = files.map(filepath => {
     date: `${year}/${month}/${day}`,
     slug,
     html: marked.parse(content),
-    excerpt: content.trim().split("\n")[0].slice(0, 100),
     url: `/posts/${year}/${month}/${slug}.html`,
-    year, month
+    year,
+    month,
   };
 });
 
@@ -49,12 +49,11 @@ for (const article of articles) {
   fs.writeFileSync(outPath, html);
 }
 
-// Generate top page with article cards
-const listCards = articles.map(article => {
+// Generate index pages with full article content
+const articleCards = articles.map(article => {
   return `
     <div class="article-card">
-      <h2><a href="${article.url}">${article.title}</a></h2>
-      <p>${article.excerpt}...</p>
+      ${article.html}
       <small>${article.date}</small>
     </div>
   `;
@@ -64,7 +63,7 @@ const totalPages = Math.ceil(articles.length / pageSize);
 for (let page = 0; page < totalPages; page++) {
   const start = page * pageSize;
   const end = start + pageSize;
-  const pageContent = listCards.slice(start, end).join("\n");
+  const pageContent = articleCards.slice(start, end).join("\n");
 
   const finalHtml = indexTemplate
     .replace("{{ header }}", header)
