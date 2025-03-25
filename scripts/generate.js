@@ -8,10 +8,14 @@ const articleDir = "articles";
 const postDir = "posts";
 const layoutTemplatePath = "templates/layout.html";
 const indexTemplatePath = "templates/index.html";
+const headerPath = "templates/partials/header.html";
+const footerPath = "templates/partials/footer.html";
 const pageSize = 10;
 
 const layoutTemplate = fs.readFileSync(layoutTemplatePath, "utf8");
 const indexTemplate = fs.readFileSync(indexTemplatePath, "utf8");
+const header = fs.readFileSync(headerPath, "utf8");
+const footer = fs.readFileSync(footerPath, "utf8");
 
 const files = glob.sync(`${articleDir}/*.md`).sort().reverse();
 const articles = files.map(filepath => {
@@ -37,9 +41,11 @@ for (const article of articles) {
   fs.ensureDirSync(outDir);
   const outPath = path.join(outDir, `${article.slug}.html`);
   const html = layoutTemplate
-    .replaceAll("{{ title }}", article.title)
-    .replaceAll("{{ date }}", article.date)
-    .replaceAll("{{ content }}", article.html);
+    .replace("{{ header }}", header)
+    .replace("{{ footer }}", footer)
+    .replace("{{ title }}", article.title)
+    .replace("{{ date }}", article.date)
+    .replace("{{ content }}", article.html);
   fs.writeFileSync(outPath, html);
 }
 
@@ -54,14 +60,16 @@ const listCards = articles.map(article => {
   `;
 });
 
-// Paginate top page if needed
 const totalPages = Math.ceil(articles.length / pageSize);
 for (let page = 0; page < totalPages; page++) {
   const start = page * pageSize;
   const end = start + pageSize;
   const pageContent = listCards.slice(start, end).join("\n");
 
-  const finalHtml = indexTemplate.replace("{{ content }}", pageContent);
+  const finalHtml = indexTemplate
+    .replace("{{ header }}", header)
+    .replace("{{ footer }}", footer)
+    .replace("{{ content }}", pageContent);
 
   if (page === 0) {
     fs.writeFileSync("index.html", finalHtml);
