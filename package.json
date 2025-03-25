@@ -1,8 +1,10 @@
 {
+  "name": "hkano-blog",
+  "version": "1.0.0",
+  "type": "module",
   "dependencies": {
-    "fs-extra": "^11.3.0",
-    "glob": "^10.4.5",
+    "nunjucks": "^3.2.4",
     "gray-matter": "^4.0.3",
-    "marked": "^15.0.7"
+    "marked": "^9.0.3"
   }
 }
