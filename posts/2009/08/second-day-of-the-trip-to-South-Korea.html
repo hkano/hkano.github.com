@@ -8,11 +8,21 @@
   <link rel="stylesheet" href="/css/custom.css" />
 </head>
 <body>
-  {{ header }}
+  <header class="site-header">
+  <h1 class="site-title">hkano.com</h1>
+  <nav class="menu">
+    <a href="https://hkano.com">Top</a> |
+    <a href="https://x.com/hkano" target="_blank">X</a> |
+    <a href="https://www.facebook.com/kano.hideaki" target="_blank">Facebook</a> |
+    <a href="https://www.instagram.com/hkano_/" target="_blank">Instagram</a> |
+    <a href="https://note.mu/hkano" target="_blank">note</a>
+  </nav>
+</header>
+
 
   <main class="container">
     <article>
-      <h1 class="article-title">韓国旅行二日目</h1>
+      <h1 class="article-title">{{ title }}</h1>
       <div class="article-body">
         <p><img src="/images/2009-08-08-second-day-of-the-trip-to-South-Korea.jpg" alt="韓国旅行二日目の仁川ワールドカップ競技場"></p>
 <p>世界遺産の宮廷に行った。
@@ -26,6 +36,11 @@
     </article>
   </main>
 
-  {{ footer }}
+  <footer id="foot">
+  <div class="copyright">
+    © hkano.com 2009 -
+  </div>
+</footer>
+
 </body>
 </html>
