@@ -1,6 +1,6 @@
 body {
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.8;
 }
 
 .site-header {
@@ -22,11 +22,11 @@ body {
 }
 
 .site-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 .menu {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .menu a {
@@ -42,7 +42,7 @@ body {
 .article-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .article-card {
@@ -51,15 +51,15 @@ body {
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  font-size: 1.05rem;
   line-height: 1.8;
-  font-size: 1rem;
 }
 
 .article-card h1,
 .article-card h2,
 .article-card h3,
 .article-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -67,7 +67,7 @@ body {
 .article-card p,
 .article-body p {
   margin: 1rem 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .article-card img,
@@ -83,7 +83,7 @@ body {
 .article-card small,
 .article-date {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #777;
   text-align: right;
   margin-top: 1rem;
@@ -97,7 +97,7 @@ body {
 
 footer#foot {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #999;
   margin-top: 3rem;
   padding-bottom: 2rem;
@@ -105,7 +105,7 @@ footer#foot {
 
 @media (max-width: 768px) {
   body {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .article-card img,
