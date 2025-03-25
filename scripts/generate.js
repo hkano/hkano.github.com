@@ -6,10 +6,12 @@ const glob = require("glob");
 
 const articleDir = "articles";
 const postDir = "posts";
-const templatePath = "templates/layout.html";
+const layoutTemplatePath = "templates/layout.html";
+const indexTemplatePath = "templates/index.html";
 const pageSize = 10;
 
-const layoutTemplate = fs.readFileSync(templatePath, "utf8");
+const layoutTemplate = fs.readFileSync(layoutTemplatePath, "utf8");
+const indexTemplate = fs.readFileSync(indexTemplatePath, "utf8");
 
 const files = glob.sync(`${articleDir}/*.md`).sort().reverse();
 const articles = files.map(filepath => {
@@ -20,14 +22,16 @@ const articles = files.map(filepath => {
   const slug = slugParts.join("-");
   return {
     title: data.title,
-    date: `${year}-${month}-${day}`,
+    date: `${year}/${month}/${day}`,
     slug,
     html: marked.parse(content),
+    excerpt: content.trim().split("\n")[0].slice(0, 100),
     url: `/posts/${year}/${month}/${slug}.html`,
     year, month
   };
 });
 
+// Generate individual article pages
 for (const article of articles) {
   const outDir = path.join(postDir, article.year, article.month);
   fs.ensureDirSync(outDir);
@@ -39,26 +43,31 @@ for (const article of articles) {
   fs.writeFileSync(outPath, html);
 }
 
-const listItems = articles.map(a =>
-  `<li><a href="${a.url}">${a.title}</a> <small>${a.date}</small></li>`
-);
+// Generate top page with article cards
+const listCards = articles.map(article => {
+  return `
+    <div class="article-card">
+      <h2><a href="${article.url}">${article.title}</a></h2>
+      <p>${article.excerpt}...</p>
+      <small>${article.date}</small>
+    </div>
+  `;
+});
 
-const totalPages = Math.ceil(listItems.length / pageSize);
+// Paginate top page if needed
+const totalPages = Math.ceil(articles.length / pageSize);
 for (let page = 0; page < totalPages; page++) {
   const start = page * pageSize;
   const end = start + pageSize;
-  const pageItems = listItems.slice(start, end).join("\n");
-  const pageHtml = `<h2>Articles</h2><ul>${pageItems}</ul>`;
-  const fullHtml = layoutTemplate
-    .replaceAll("{{ title }}", "Blog")
-    .replaceAll("{{ date }}", "")
-    .replaceAll("{{ content }}", pageHtml);
+  const pageContent = listCards.slice(start, end).join("\n");
+
+  const finalHtml = indexTemplate.replace("{{ content }}", pageContent);
 
   if (page === 0) {
-    fs.writeFileSync("index.html", fullHtml);
+    fs.writeFileSync("index.html", finalHtml);
   } else {
     const pageDir = path.join("page", String(page + 1));
     fs.ensureDirSync(pageDir);
-    fs.writeFileSync(path.join(pageDir, "index.html"), fullHtml);
+    fs.writeFileSync(path.join(pageDir, "index.html"), finalHtml);
   }
 }
