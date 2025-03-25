@@ -8,7 +8,7 @@ nunjucks.configure('templates', { autoescape: false });
 
 const articlesDir = 'articles';
 const postsDir = 'public/posts';
-const indexPath = 'public/index.html';
+const indexPath = 'index.html';
 
 const allArticles = [];
 
