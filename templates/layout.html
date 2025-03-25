@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>hkano.com</title>
+  <title>{{ title }}</title>
   <link rel="stylesheet" href="https://unpkg.com/milligram@1.4.1/dist/milligram.min.css" />
   <link rel="stylesheet" href="/css/custom.css" />
 </head>
@@ -25,11 +25,13 @@
   </header>
 
   <main class="container">
-    <h1 class="site-title">hkano.com</h1>
-
-    <section class="article-list">
-      {{ content }}
-    </section>
+    <article>
+      <h1 class="article-title">{{ title }}</h1>
+      <div class="article-body">
+        {{ content }}
+      </div>
+      <p class="article-date">Date: {{ date }}</p>
+    </article>
   </main>
 
   <footer id="foot">
