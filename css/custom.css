@@ -1,3 +1,8 @@
+body {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
 .site-header {
   text-align: center;
   margin: 2rem 0;
@@ -41,57 +46,53 @@
 }
 
 .article-card {
-  padding: 1.5rem;
+  padding: 2rem;
   border: 1px solid #eee;
-  border-radius: 4px;
-  background: #fafafa;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  line-height: 1.8;
+  font-size: 1rem;
 }
 
-.article-card h2 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.4rem;
-}
-
-.article-card p {
-  margin: 0.5rem 0 0;
-  font-size: 0.95rem;
-  color: #444;
-}
-
-.article-card small {
-  display: block;
-  font-size: 0.8rem;
-  color: #777;
-  margin-top: 0.5rem;
-}
-
+.article-card h1,
+.article-card h2,
+.article-card h3,
 .article-title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
-.article-body {
-  line-height: 1.7;
-  font-size: 1.05rem;
-  margin-bottom: 2rem;
+.article-card p,
+.article-body p {
+  margin: 1rem 0;
+  font-size: 1rem;
 }
 
+.article-card img,
 .article-body img {
   display: block;
   margin: 2rem auto;
   max-width: 100%;
-  width: 100%;
-  max-width: 600px;
   height: auto;
+  width: auto;
+  max-height: 480px;
 }
 
+.article-card small,
 .article-date {
+  display: block;
   font-size: 0.85rem;
   color: #777;
   text-align: right;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+.article-body {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
 }
 
 footer#foot {
@@ -100,4 +101,15 @@ footer#foot {
   color: #999;
   margin-top: 3rem;
   padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+
+  .article-card img,
+  .article-body img {
+    max-height: none;
+  }
 }
