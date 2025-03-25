@@ -69,11 +69,6 @@ a:hover {
   font-weight: inherit;
 }
 
-.site-title {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
 .menu {
   font-size: 1.5rem;
   margin-bottom: 2rem;
@@ -90,12 +85,7 @@ a:hover {
 }
 
 .article-card {
-  padding: 2.5rem 0;
-  border-top: 1px solid #ccc;
-}
-
-.article-card:first-child {
-  border-top: none;
+  padding: 4rem 0;
 }
 
 .article-title {
@@ -123,7 +113,7 @@ a:hover {
 .article-date {
   font-size: 1.25rem;
   color: #666;
-  text-align: right;
+  text-align: left;
   margin-top: 1rem;
 }
 
