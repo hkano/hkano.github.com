@@ -1,6 +1,6 @@
 body {
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: 21px;
+  line-height: 1.9;
 }
 
 .site-header {
@@ -51,8 +51,8 @@ body {
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-  font-size: 1.05rem;
-  line-height: 1.8;
+  font-size: 1.15rem;
+  line-height: 1.9;
 }
 
 .article-card h1,
@@ -67,7 +67,7 @@ body {
 .article-card p,
 .article-body p {
   margin: 1rem 0;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 .article-card img,
@@ -90,8 +90,8 @@ body {
 }
 
 .article-body {
-  line-height: 1.8;
-  font-size: 1.05rem;
+  line-height: 1.9;
+  font-size: 1.15rem;
   margin-bottom: 2rem;
 }
 
@@ -101,15 +101,4 @@ footer#foot {
   color: #999;
   margin-top: 3rem;
   padding-bottom: 2rem;
-}
-
-@media (max-width: 768px) {
-  body {
-    font-size: 20px;
-  }
-
-  .article-card img,
-  .article-body img {
-    max-height: none;
-  }
 }
