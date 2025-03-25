@@ -3,9 +3,21 @@
   margin: 2rem 0;
 }
 
+.site-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.site-logo {
+  height: 40px;
+  width: auto;
+}
+
 .site-title {
   font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
 .menu {
@@ -66,13 +78,6 @@
   margin-bottom: 2rem;
 }
 
-.article-date {
-  font-size: 0.85rem;
-  color: #777;
-  text-align: right;
-  margin-bottom: 3rem;
-}
-
 .article-body img {
   display: block;
   margin: 2rem auto;
@@ -80,6 +85,13 @@
   width: 100%;
   max-width: 600px;
   height: auto;
+}
+
+.article-date {
+  font-size: 0.85rem;
+  color: #777;
+  text-align: right;
+  margin-bottom: 3rem;
 }
 
 footer#foot {
