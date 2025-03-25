@@ -3,52 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>こんにちは！こんにちは！</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="apple-touch-icon" href="/logo-192.png" />
-  <link rel="icon" sizes="192x192" href="/logo-192.png" />
+  <title>{% block title %}hkano.com{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
   <link rel="stylesheet" href="/css/custom.css" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/logo-192.png" />
+  <link rel="apple-touch-icon" href="/logo-192.png" />
 </head>
 <body>
-  <header class="site-header">
-  <div class="site-brand">
-    <h1 class="brand-group">
-      <a href="https://hkano.com" class="brand-link">
-        <img src="/images/logo.png" alt="hkano.com" class="site-logo" />
-        <span class="site-title">hkano.com</span>
-      </a>
-    </h1>
-  </div>
-  <div class="menu">
-    |
-    <a href="https://hkano.com">Top</a>
-    |
-    <a href="https://x.com/hkano" target="_blank">X</a>
-    |
-    <a href="https://www.facebook.com/kano.hideaki" target="_blank">Facebook</a>
-    |
-    <a href="https://www.instagram.com/hkano_/" target="_blank">Instagram</a>
-    |
-    <a href="https://note.mu/hkano" target="_blank">note</a>
-    |
-  </div>
-</header>
+  {% include "partials/header.html" %}
 
-  <main>
-    <article class="article-body">
-      <h2 class="article-title">こんにちは！こんにちは！</h2>
-      <p>こんにちは！こんにちは！</p>
-<p><img src="/images/2009-01-01-the-first-shrine-visit-of-the-year.jpg" alt="2009年の初詣"></p>
+  {% block content %}{% endblock %}
 
-    </article>
-    <div class="article-date">Date: 2009/01/01</div>
-  </main>
-  <footer id="foot">
-  <div class="copyright">
-    © hkano.com 2009 -
-  </div>
-</footer>
-
+  {% include "partials/footer.html" %}
 </body>
 </html>
