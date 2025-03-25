@@ -35,7 +35,6 @@ const articles = files.map(filepath => {
   };
 });
 
-// Generate individual article pages
 for (const article of articles) {
   const outDir = path.join(postDir, article.year, article.month);
   fs.ensureDirSync(outDir);
@@ -49,10 +48,10 @@ for (const article of articles) {
   fs.writeFileSync(outPath, html);
 }
 
-// Generate index pages with full article content
 const articleCards = articles.map(article => {
   return `
     <div class="article-card">
+      <h2 class="article-title"><a href="${article.url}">${article.title}</a></h2>
       ${article.html}
       <small>${article.date}</small>
     </div>
