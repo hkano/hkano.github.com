@@ -23,8 +23,8 @@ for (const file of files) {
   const htmlContent = marked(content);
 
   const filename = path.basename(file, '.md');
-  const [year, month, slug] = filename.split('-');
-
+  const [year, month, ...slugParts] = filename.split('-');
+  const slug = slugParts.join('-');
   const outputPath = path.join(postsDir, `${year}/${month}/${slug}.html`);
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
