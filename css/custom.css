@@ -1,8 +1,8 @@
 html {
   font-size: 100%;
-  color: #111;
+  color: #333;
   background: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
 }
 
 body {
@@ -38,7 +38,7 @@ a:hover {
 
 .site-brand {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
@@ -82,6 +82,7 @@ a:hover {
   font-size: 2.4rem;
   margin-top: 0;
   margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .article-title a {
