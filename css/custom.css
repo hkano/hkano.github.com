@@ -1,19 +1,14 @@
 html {
   font-family: "Helvetica Neue", "Helvetica", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-  background: #fff;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
 }
 
 body {
-  font-size: 1.875rem;
-  line-height: 2;
-  margin: 0;
-  padding: 0;
-  color: #333;
   max-width: 768px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding: 2rem 1rem;
 }
 
@@ -24,79 +19,80 @@ img {
 }
 
 a {
-  color: #000;
-  text-decoration: underline;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:hover {
-  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .site-header {
   text-align: center;
-  margin: 3rem 0;
+  margin: 3rem 0 2rem;
 }
 
 .site-brand {
-  margin-bottom: 2rem;
-}
-
-.brand-group {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin: 0;
-  font-size: 2.6rem;
-  font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
 .site-logo {
   height: 64px;
   width: auto;
+  display: block;
 }
 
 .site-title {
-  font-size: inherit;
-  font-weight: inherit;
-  text-decoration: none;
-  color: inherit;
+  font-size: 2.6rem;
+  font-weight: bold;
 }
 
-.menu {
-  margin: 2rem 0;
-  font-size: 0.9rem;
-  color: #666;
+.site-nav {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.menu a {
-  color: inherit;
+.site-nav a {
+  color: #333;
   text-decoration: none;
   margin: 0 0.5rem;
 }
 
-.menu a:hover {
+.site-nav a:hover {
   text-decoration: underline;
 }
 
-.article {
-  margin-bottom: 4rem;
-}
-
 .article-title {
-  font-size: 1.5rem;
-  margin: 2rem 0 1rem;
+  font-size: 1.75rem;
   font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000;
 }
 
-.article-content p {
-  margin-bottom: 1rem;
+.article-content {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-image {
+  margin: 2rem 0;
 }
 
 .article-date {
-  font-size: 0.75rem;
-  color: #666;
-  margin-top: 1rem;
+  font-size: 1rem;
+  color: #888;
   text-align: left;
+  margin-top: 1rem;
 }
 
 footer#foot {
