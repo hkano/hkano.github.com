@@ -9,9 +9,11 @@
         <a href="{{ article.url }}">{{ article.title }}</a>
       </h2>
       <div class="article-body">
-        {{ article.content }}
+        {{ article.content | safe }}
       </div>
-      <div class="article-date">Date: {{ article.date }}</div>
+      <div class="article-date">
+        Date: {{ article.date }}
+      </div>
     </article>
   {% endfor %}
 {% endblock %}
