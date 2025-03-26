@@ -21,6 +21,12 @@ a:hover {
   text-decoration: underline;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 .container {
   max-width: 768px;
   margin: 0 auto;
@@ -33,61 +39,70 @@ a:hover {
 }
 
 .site-brand {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  justify-content: center;
   margin-bottom: 2rem;
 }
 
-.brand-logo {
+.site-logo {
   height: 64px;
   width: auto;
+  display: block;
 }
 
-.brand-link {
+.site-title {
   font-size: 2.6rem;
   font-weight: bold;
+  margin: 0;
+}
+
+.site-title a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .site-nav {
   margin-bottom: 2rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .site-nav a {
-  color: #444;
   margin: 0 0.5rem;
+  color: inherit;
 }
 
 .site-nav a:hover {
   text-decoration: underline;
 }
 
-footer {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #999;
-  margin: 3rem 0;
-}
-
 .article {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .article-title {
   font-size: 1.5rem;
   font-weight: bold;
-  margin: 1rem 0 0.5rem;
+  margin-top: 2rem;
 }
 
 .article-content {
-  margin: 1rem 0;
   font-size: 1rem;
+  margin: 1rem 0;
 }
 
 .article-date {
   font-size: 0.8rem;
   color: #666;
+  margin-top: 1rem;
   text-align: left;
+}
+
+footer#foot {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #888;
+  margin: 3rem 0;
 }
