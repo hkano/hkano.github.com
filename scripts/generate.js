@@ -7,14 +7,17 @@ import { marked } from 'marked';
 nunjucks.configure('templates', { autoescape: false });
 
 const articlesDir = 'articles';
-const postsDir = 'public/posts';
+const postsDir = 'posts';
 const indexPath = 'index.html';
 
 const allArticles = [];
 
 fs.mkdirSync(postsDir, { recursive: true });
 
-const files = fs.readdirSync(articlesDir).filter(f => f.endsWith('.md'));
+const files = fs.readdirSync(articlesDir)
+  .filter(f => f.endsWith('.md'))
+  .sort()
+  .reverse();
 
 for (const file of files) {
   const filePath = path.join(articlesDir, file);
@@ -23,14 +26,14 @@ for (const file of files) {
   const htmlContent = marked(content);
 
   const filename = path.basename(file, '.md');
-  const [year, month, ...slugParts] = filename.split('-');
+  const [year, month, day, ...slugParts] = filename.split('-');
   const slug = slugParts.join('-');
   const outputPath = path.join(postsDir, `${year}/${month}/${slug}.html`);
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
   const html = nunjucks.render('post.html', {
     title: data.title,
-    date: `${year}/${month}`,
+    date: `${year}/${month}/${day}`,
     content: htmlContent
   });
 
@@ -38,7 +41,7 @@ for (const file of files) {
 
   allArticles.push({
     title: data.title,
-    date: `${year}/${month}`,
+    date: `${year}/${month}/${day}`,
     content: htmlContent,
     url: `/posts/${year}/${month}/${slug}.html`
   });
