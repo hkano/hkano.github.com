@@ -8,12 +8,9 @@ html {
 body {
   font-size: 1.5rem;
   line-height: 2;
-  margin: 0;
-  padding: 0;
   color: #333;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding: 0 1rem;
 }
 
@@ -56,17 +53,18 @@ a:hover {
 }
 
 .site-title {
-  font-size: 2.6rem;
+  font-size: 3rem;
   font-weight: bold;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem; 
+  gap: 0.25rem; 
   color: inherit;
+  padding-right: 0.5rem; 
 }
 
 .site-nav {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 2rem;
 }
 
