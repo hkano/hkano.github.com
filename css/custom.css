@@ -24,12 +24,12 @@ img {
 }
 
 a {
-  color: inherit;
-  text-decoration: underline;
+  color: #000;
+  text-decoration: none;
 }
 
 a:hover {
-  opacity: 0.75;
+  text-decoration: underline;
 }
 
 .site-header {
@@ -55,7 +55,14 @@ a:hover {
   justify-content: center;
   gap: 0.5rem; 
   color: inherit;
+}
+
+.site-title a {
   text-decoration: none;
+}
+
+.site-title a:hover {
+  opacity: 0.75;
 }
 
 .site-nav {
@@ -65,12 +72,7 @@ a:hover {
 
 .site-nav a {
   margin: 0 1rem
-  text-decoration: none;
   color: inherit;
-}
-
-.site-nav a:hover {
-  text-decoration: underline;
 }
 
 .article-card {
@@ -78,25 +80,9 @@ a:hover {
 }
 
 .article-title {
-  font-size: 2.4rem;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
   font-weight: bold;
-}
-
-.article-title a {
-  text-decoration: none;
-  color: #000;
-}
-
-.article-title a:hover {
-  text-decoration: underline;
-}
-
-.article-body {
-  font-size: 1.875rem;
-  line-height: 2;
-  margin-bottom: 2rem;
+  margin: 2rem 0 1rem;
 }
 
 .article-date {
