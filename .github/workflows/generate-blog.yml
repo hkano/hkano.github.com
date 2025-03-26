@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -21,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install gray-matter marked fs-extra glob
+        run: npm install nunjucks gray-matter marked
 
       - name: Run blog generator
         run: node scripts/generate.js
