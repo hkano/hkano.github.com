@@ -1,10 +1,12 @@
 html {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Segoe UI", Meiryo, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI",
+    "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  line-height: 1.6;
   font-size: 18px;
-  line-height: 1.8;
-  color: #222;
+  color: #333;
   background: #fff;
-  -webkit-text-size-adjust: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 body {
@@ -15,7 +17,7 @@ body {
 img {
   max-width: 100%;
   height: auto;
-  vertical-align: middle;
+  display: block;
 }
 
 a {
@@ -56,7 +58,6 @@ a:hover {
   margin: 0;
   font-size: 2.6rem;
   font-weight: bold;
-  text-decoration: none;
 }
 
 .site-title a {
@@ -64,22 +65,18 @@ a:hover {
 }
 
 .site-nav {
-  font-size: 1rem;
-  margin-bottom: 3rem;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .site-nav a {
+  color: inherit;
+  text-decoration: none;
   margin: 0 0.5rem;
 }
 
-.site-nav a::before {
-  content: "|";
-  margin-right: 0.5rem;
-}
-
-.site-nav a:first-child::before {
-  content: "";
-  margin: 0;
+.site-nav a:hover {
+  text-decoration: underline;
 }
 
 .article {
@@ -87,25 +84,21 @@ a:hover {
 }
 
 .article-title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  margin: 1rem 0 0.5rem;
   font-weight: bold;
 }
 
-.article-content {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
 .article-date {
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #666;
   text-align: left;
+  margin-top: 0.5rem;
 }
 
-footer#foot {
+footer {
   text-align: center;
-  font-size: 0.8rem;
-  color: #888;
+  font-size: 0.75rem;
+  color: #999;
   padding: 2rem 0;
 }
