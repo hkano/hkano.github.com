@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ title }} - hkano.com{% endblock %}
+{% block title %}{{ title }} | hkano.com{% endblock %}
 
 {% block content %}
   <article class="article-card">
     <h2 class="article-title">{{ title }}</h2>
     <div class="article-body">
-      {{ content }}
+      {{ content | safe }}
     </div>
-    <div class="article-date">Date: {{ date }}</div>
+    <div class="article-date">
+      Date: {{ date }}
+    </div>
   </article>
 {% endblock %}
