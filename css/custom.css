@@ -41,6 +41,14 @@ a:hover {
   margin-bottom: 2rem;
 }
 
+.site-brand a {
+  text-decoration: none;
+}
+
+.site-brand a:hover {
+  opacity: 0.75;
+}
+
 .site-logo {
   height: 64px;
   width: auto;
@@ -55,14 +63,6 @@ a:hover {
   justify-content: center;
   gap: 0.5rem; 
   color: inherit;
-}
-
-.site-title a {
-  text-decoration: none;
-}
-
-.site-title a:hover {
-  opacity: 0.75;
 }
 
 .site-nav {
