@@ -7,8 +7,8 @@ html {
 
 body {
   font-size: 1.25rem;
-  line-height: 1.5;
   color: #333;
+  line-height: 1.5;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -31,6 +31,7 @@ a:hover {
 
 .site-header {
   text-align: center;
+  line-height: 1;
   margin: 1rem 0;
 }
 
@@ -93,9 +94,9 @@ a:hover {
 }
 
 footer#foot {
-  text-align: center;
   font-size: 1.25rem;
   color: #999;
+  text-align: center;
   margin-top: 2rem;
   padding-bottom: 2rem;
 }
