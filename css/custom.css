@@ -15,9 +15,9 @@ body {
 }
 
 img {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 a {
@@ -48,19 +48,19 @@ a:hover {
 }
 
 .site-logo {
+  display: block;
   height: 64px;
   width: auto;
-  display: block;
 }
 
 .site-title {
   font-size: 3rem;
   font-weight: bold;
+  color: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.25rem; 
-  color: inherit;
   padding-right: 0.5rem; 
 }
 
@@ -70,8 +70,8 @@ a:hover {
 }
 
 .site-nav a {
-  margin: 0 0.25rem;
   color: inherit;
+  margin: 0 0.25rem;
 }
 
 .article-card {
@@ -83,6 +83,13 @@ a:hover {
   font-weight: bold;
   margin-top: 0.5rem;
   margin-bottom: 0;
+}
+
+.article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0.5rem auto;
 }
 
 .article-date {
