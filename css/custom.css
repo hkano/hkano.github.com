@@ -75,8 +75,7 @@ a:hover {
 }
 
 .article-card {
-  padding-top: 1rem;
-  padding-bottom: 3rem;
+  padding: 2rem 0;
 }
 
 .article-title {
