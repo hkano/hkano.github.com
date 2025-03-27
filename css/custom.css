@@ -69,7 +69,7 @@ a:hover {
 }
 
 .site-nav a {
-  margin: 0 1rem
+  margin: 0 1rem;
   color: inherit;
 }
 
@@ -80,7 +80,7 @@ a:hover {
 .article-title {
   font-size: 2rem;
   font-weight: bold;
-  margin: 2rem 0 1rem;
+  margin: 1.5rem 0 0.5rem;
 }
 
 .article-date {
