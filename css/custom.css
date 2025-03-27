@@ -69,6 +69,7 @@ a:hover {
 }
 
 .site-nav a {
+  margin: 0 0.25rem;
   color: inherit;
 }
 
@@ -80,6 +81,7 @@ a:hover {
   font-size: 2rem;
   font-weight: bold;
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .article-date {
