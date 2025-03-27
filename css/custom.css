@@ -87,11 +87,11 @@ a:hover {
 
 .article-body img {
   display: block;
-  object-fit: contain;
   width: 100%;
   max-width: 800px;
   height: auto;
   max-height: 600px;
+  object-fit: contain;
   margin: 0.5rem auto;
 }
 
