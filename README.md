@@ -1,66 +1,64 @@
 # hkano.com
 
-This repository contains the source code for [hkano.com](https://hkano.com), a static personal website built using Nunjucks templates and custom CSS, and deployed via GitHub Pages.
+This repository contains the source code and publishing workflow for [hkano.com](https://hkano.com), a personal website powered by a custom static site generator using Node.js and Nunjucks.
 
 ## ✨ Overview
 
-- **Framework**: Static site generator using [Nunjucks](https://mozilla.github.io/nunjucks/)
-- **Styling**: Hand-crafted CSS (no frameworks)
-- **Deployment**: GitHub Pages (with custom domain: `hkano.com`)
-- **Content**: Written in structured data and compiled into HTML via script
+This site is a simple static blog built from Markdown files using a custom generator script.  
+It supports pagination, templating with Nunjucks, and is automatically deployed via GitHub Pages.
 
-## 📁 Structure
+## ✍️ Writing Articles
+
+- Write articles in the `articles/` directory.
+- File format: `YYYY-MM-DD-slug.md`
+- Example: `articles/YYYY-MM-DD-my-article.md`
+
+Each article uses [frontmatter](https://github.com/jonschlinkert/gray-matter) for metadata:
+
+```markdown
+---
+title: "My First Post"
+---
+This is the body text in **Markdown**.
+```
+
+## 🛠️ Generating HTML
+
+Run the generator script to convert Markdown into HTML:
+
+```bash
+node scripts/generate.cjs
+```
+
+This will:
+- Parse all Markdown in `articles/`
+- Generate individual pages in `docs/posts/YYYY/MM/slug.html`
+- Generate paginated `index.html` pages
+- Copy all files from `static/` into `docs/`
+
+## 🧩 Directory Structure
 
 ```
 .
-├── css/               # Custom CSS for styling
-├── js/                # Client-side scripts
-├── templates/         # Nunjucks templates
-├── articles/          # Article source data (.md format)
-├── scripts/           # Generator scripts (Node.js)
-├── .github/workflows/ # GitHub Actions workflow for auto-generation
-└── index.html         # Generated top page
-```
-
-## 🛠 Development
-
-No manual build step is required in general.  
-Whenever a new article or template is pushed, a GitHub Actions workflow automatically generates the corresponding HTML files.
-
-If needed, you can run the build locally for preview:
-
-```bash
-node scripts/generate.js
+├── articles/            # Markdown articles
+├── static/              # Static assets (css, images, favicon, etc.)
+├── templates/           # Nunjucks templates
+├── scripts/
+│   └── generate.cjs     # Generator script
+├── docs/                # GitHub Pages output (generated)
+└── .github/workflows/
+    └── generate-blog.yml  # Auto-generation workflow
 ```
 
 ## 🚀 Deployment
 
-This site is deployed via GitHub Pages, and published automatically when the HTML files are regenerated.
+This site is deployed via [GitHub Pages](https://pages.github.com/).  
+All content is served from the `docs/` directory.  
+GitHub Actions runs `scripts/generate.cjs` on every push and commits the result.
 
-The generation process is handled by a GitHub Actions workflow:
-- Triggered on changes to articles (`articles/**/*.md`), templates, or the generator script
-- Uses Node.js to render static HTML from the data and templates
-- Commits and pushes the generated HTML back to the `main` branch
-
-The site is published at [hkano.com](https://hkano.com) using a custom domain.
-
-## ✍️ Writing Content
-
-Each article is written as a Markdown file under `articles/`. Example format:
-
-```markdown
----
-title: "Example Article"
-slug: "example-article"
-date: "YYYY-MM-DD"
----
-
-Here is the body of the article. It can contain Markdown content.
-```
-
-Slugs are automatically assigned based on file names and meta information, and embedded in the generated HTML as `<meta name="slug" content="...">`.
+You can also trigger the generator manually via the **Actions** tab.
 
 ## 📄 License
 
-- **Source code**: [MIT License](https://opensource.org/licenses/MIT)
-- **Content** (articles, text, and images): © hkano.com. All rights reserved. Do not reproduce without permission.
+- Source code: [MIT License](https://opensource.org/licenses/MIT)
+- Content (articles, text, and images): © hkano.com. All rights reserved.
