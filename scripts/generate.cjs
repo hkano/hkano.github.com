@@ -95,9 +95,7 @@ function generateRedirectHtml(target = '/') {
     <meta http-equiv="refresh" content="0; url=${target}" />
     <title>Redirecting...</title>
   </head>
-  <body>
-    <p>Redirecting to <a href="${target}">${target}</a>.</p>
-  </body>
+  <body></body>
 </html>`;
 }
 
