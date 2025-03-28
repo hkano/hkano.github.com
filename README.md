@@ -34,6 +34,8 @@ This will:
 - Parse all Markdown in `articles/`
 - Generate individual pages in `docs/posts/YYYY/MM/slug.html`
 - Generate paginated `index.html` pages
+- Generate redirect pages for each `/posts/YYYY/MM/` month (from 2009 to current)
+- Generate a redirect for `/page/` to point back to the homepage
 - Copy all files from `static/` into `docs/`
 
 ## 🧩 Directory Structure
