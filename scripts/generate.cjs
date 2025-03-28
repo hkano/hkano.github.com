@@ -81,34 +81,26 @@ function copyStaticAssets() {
     const srcDir = path.join(__dirname, dir);
     const destDir = path.join(OUTPUT_DIR, dir);
 
-    if (!fs.existsSync(srcDir)) continue;
-    fs.mkdirSync(destDir, { recursive: true });
-
-    const files = fs.readdirSync(srcDir);
-    for (const file of files) {
-      const srcFile = path.join(srcDir, file);
-      const destFile = path.join(destDir, file);
-
-      const stat = fs.statSync(srcFile);
-      if (stat.isFile()) {
-        fs.copyFileSync(srcFile, destFile);
-      } else if (stat.isDirectory()) {
-        copyDirectoryRecursive(srcFile, path.join(destDir, file));
-      }
+    if (fs.existsSync(srcDir)) {
+      copyDirectoryRecursive(srcDir, destDir);
     }
   }
 }
 
 function copyDirectoryRecursive(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  const entries = fs.readdirSync(src);
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
+  }
+
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+
   for (const entry of entries) {
-    const srcPath = path.join(src, entry);
-    const destPath = path.join(dest, entry);
-    const stat = fs.statSync(srcPath);
-    if (stat.isDirectory()) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+
+    if (entry.isDirectory()) {
       copyDirectoryRecursive(srcPath, destPath);
-    } else {
+    } else if (entry.isFile()) {
       fs.copyFileSync(srcPath, destPath);
     }
   }
