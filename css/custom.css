@@ -21,11 +21,12 @@ img {
 }
 
 a {
-  color: #000;
+  color: #111;
   text-decoration: none;
 }
 
 a:hover {
+  color: #333;
   text-decoration: underline;
 }
 
@@ -81,6 +82,7 @@ a:hover {
 .article-title {
   font-size: 2rem;
   font-weight: bold;
+  color: #1a1a1a;
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
