@@ -75,10 +75,23 @@ function generateIndexPages(articles) {
   }
 }
 
+function copyStaticAssets() {
+  const assetDirs = ['css', 'images', 'js'];
+  for (const dir of assetDirs) {
+    const src = path.join(__dirname, dir);
+    const dest = path.join(OUTPUT_DIR, dir);
+    if (fs.existsSync(src)) {
+      fs.mkdirSync(dest, { recursive: true });
+      fs.cpSync(src, dest, { recursive: true });
+    }
+  }
+}
+
 function main() {
   const articles = loadArticles();
   generatePostPages(articles);
   generateIndexPages(articles);
+  copyStaticAssets();
 }
 
 main();
