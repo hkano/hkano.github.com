@@ -42,7 +42,7 @@ function loadArticles() {
 
 function generatePostPages(articles) {
   for (const article of articles) {
-    const filePath = path.join(OUTPUT_DIR, url);
+    const filePath = path.join(OUTPUT_DIR, article.url);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     const html = nunjucks.render('post.njk', { article });
     fs.writeFileSync(filePath, html);
