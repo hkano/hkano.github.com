@@ -10,9 +10,12 @@ const ARTICLES_DIR = 'articles';
 const OUTPUT_DIR = 'dist';
 const ARTICLES_PER_PAGE = 10;
 
-function generateSlug(filePath) {
-  const { name } = path.parse(filePath);
-  return name;
+function generateSlugAndDate(fileName) {
+  const name = path.parse(fileName).name;
+  const [year, month, day, ...slugParts] = name.split('-');
+  const date = `${year}-${month}-${day}`;
+  const slug = slugParts.join('-');
+  return { date, slug };
 }
 
 function loadArticles() {
@@ -20,13 +23,15 @@ function loadArticles() {
   const articles = files
     .filter(file => file.endsWith('.md'))
     .map(file => {
-      const content = fs.readFileSync(path.join(ARTICLES_DIR, file), 'utf-8');
+      const filePath = path.join(ARTICLES_DIR, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
       const { data, content: body } = matter(content);
-      const slug = generateSlug(file);
+      const { date, slug } = generateSlugAndDate(file);
       return {
         ...data,
-        body: marked.parse(body),
-        slug
+        date,
+        slug,
+        body: marked.parse(body)
       };
     });
 
