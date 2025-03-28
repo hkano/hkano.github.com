@@ -31,7 +31,7 @@ function loadArticles() {
         ...data,
         date,
         slug,
-        url: `posts/${date.slice(0, 4)}/${date.slice(5, 2)}/${slug}.html`,
+        url: path.join('posts', date.slice(0, 4), date.slice(5, 7), `${slug}.html`),
         body: marked.parse(body)
       };
     });
@@ -42,13 +42,7 @@ function loadArticles() {
 
 function generatePostPages(articles) {
   for (const article of articles) {
-    const filePath = path.join(
-      OUTPUT_DIR,
-      'posts',
-      article.date.slice(0, 4),
-      article.date.slice(5, 7),
-      `${article.slug}.html`
-    );
+    const filePath = path.join(OUTPUT_DIR, url);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     const html = nunjucks.render('post.njk', { article });
     fs.writeFileSync(filePath, html);
