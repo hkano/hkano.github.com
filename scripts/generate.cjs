@@ -8,6 +8,7 @@ nunjucks.configure('templates', { autoescape: true });
 
 const ARTICLES_DIR = 'articles';
 const OUTPUT_DIR = 'docs';
+const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 
 function generateSlugAndDate(fileName) {
@@ -31,7 +32,7 @@ function loadArticles() {
         ...data,
         date,
         slug,
-        url: path.join('posts', date.slice(0, 4), date.slice(5, 7), `${slug}.html`),
+        url: `posts/${date.slice(0, 4)}/${date.slice(5, 7)}/${slug}.html`,
         body: marked.parse(body)
       };
     });
@@ -42,7 +43,13 @@ function loadArticles() {
 
 function generatePostPages(articles) {
   for (const article of articles) {
-    const filePath = path.join(OUTPUT_DIR, article.url);
+    const filePath = path.join(
+      OUTPUT_DIR,
+      'posts',
+      article.date.slice(0, 4),
+      article.date.slice(5, 7),
+      `${article.slug}.html`
+    );
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     const html = nunjucks.render('post.njk', { article });
     fs.writeFileSync(filePath, html);
@@ -71,14 +78,9 @@ function generateIndexPages(articles) {
 }
 
 function copyStaticAssets() {
-  const assetDirs = ['css', 'images', 'js'];
-  for (const dir of assetDirs) {
-    const srcDir = path.join(process.cwd(), dir);
-    const destDir = path.join(OUTPUT_DIR, dir);
-    if (fs.existsSync(srcDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
-      fs.cpSync(srcDir, destDir, { recursive: true });
-    }
+  const staticDir = path.join(process.cwd(), STATIC_DIR);
+  if (fs.existsSync(staticDir)) {
+    fs.cpSync(staticDir, OUTPUT_DIR, { recursive: true });
   }
 }
 
