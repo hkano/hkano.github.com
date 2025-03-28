@@ -6,10 +6,10 @@
   <article class="article-card">
     <h2 class="article-title">{{ title }}</h2>
     <div class="article-body">
-      {{ content | safe }}
+      {{ body | safe }}
     </div>
     <div class="article-date">
-      Date: {{ date }}
+      Date: {{ article.date }}
     </div>
   </article>
 {% endblock %}
