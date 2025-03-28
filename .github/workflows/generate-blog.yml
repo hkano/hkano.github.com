@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'articles/**/*.md'
-      - 'scripts/generate.js'
+      - 'scripts/generate.cjs'
       - 'templates/**'
       - '.github/workflows/generate-blog.yml'
 
@@ -25,7 +25,7 @@ jobs:
         run: npm install nunjucks gray-matter marked
 
       - name: Run blog generator
-        run: node scripts/generate.js
+        run: node scripts/generate.cjs
 
       - name: Commit and push changes
         run: |
