@@ -31,7 +31,6 @@ function loadArticles() {
         ...data,
         date,
         slug,
-        url: `posts/${date.slice(0, 4)}/${date.slice(5, 2)}/${slug}.html`,
         body: marked.parse(body)
       };
     });
