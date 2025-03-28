@@ -11,12 +11,12 @@
   <title>{% block title %}hkano.com{% endblock %}</title>
 </head>
 <body>
-  {% include "partials/header.html" %}
+  {% include "partials/header.njk" %}
 
   <main class="container">
     {% block content %}{% endblock %}
   </main>
 
-  {% include "partials/footer.html" %}
+  {% include "partials/footer.njk" %}
 </body>
 </html>
