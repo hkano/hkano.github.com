@@ -55,10 +55,10 @@ a:hover {
 }
 
 .site-title {
+  display: inline-flex;
   font-size: 3rem;
   font-weight: bold;
   color: inherit;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.25rem; 
@@ -103,6 +103,39 @@ a:hover {
   color: #666;
   text-align: left;
   margin-top: 0.5rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0;
+}
+
+.pagination-link {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 2rem;
+  font-weight: bold;
+  background: #fff;
+  color: #444;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pagination-link:hover {
+  background: #eee;
+}
+
+.pagination-link.is-current {
+  background: #666;
+  color: #fff;
+  pointer-events: none;
+  box-shadow: none;
 }
 
 footer#foot {
