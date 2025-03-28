@@ -78,30 +78,11 @@ function generateIndexPages(articles) {
 function copyStaticAssets() {
   const assetDirs = ['css', 'images', 'js'];
   for (const dir of assetDirs) {
-    const srcDir = path.join(__dirname, dir);
+    const srcDir = path.join(process.cwd(), dir);
     const destDir = path.join(OUTPUT_DIR, dir);
-
     if (fs.existsSync(srcDir)) {
-      copyDirectoryRecursive(srcDir, destDir);
-    }
-  }
-}
-
-function copyDirectoryRecursive(src, dest) {
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
-
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-
-    if (entry.isDirectory()) {
-      copyDirectoryRecursive(srcPath, destPath);
-    } else if (entry.isFile()) {
-      fs.copyFileSync(srcPath, destPath);
+      fs.mkdirSync(destDir, { recursive: true });
+      fs.cpSync(srcDir, destDir, { recursive: true });
     }
   }
 }
