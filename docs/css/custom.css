@@ -109,7 +109,7 @@ a:hover {
   display: flex;
   justify-content: center;
   margin: 0;
-  padding: 0 0 30px 0;
+  padding-bottom: 0.5rem;
 }
 
 .pagination-link,
@@ -117,18 +117,18 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  font-size: 1em;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
   border-radius: 50%;
-  margin: 0 5px;
+  margin: 0 0.25rem;
   text-decoration: none;
 }
 
 .pagination-link {
   color: #666 !important;
   background: #fff;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .pagination-link:hover {
@@ -141,6 +141,7 @@ a:hover {
   color: #fff !important;
   background: #666;
   pointer-events: none;
+  box-shadow: none;
 }
 
 .pagination-ellipsis {
