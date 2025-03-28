@@ -1,51 +1,79 @@
-import fs from 'fs';
-import path from 'path';
-import nunjucks from 'nunjucks';
-import matter from 'gray-matter';
-import { marked } from 'marked';
+const fs = require('fs');
+const path = require('path');
+const matter = require('gray-matter');
+const marked = require('marked');
+const nunjucks = require('nunjucks');
 
-nunjucks.configure('templates', { autoescape: false });
+nunjucks.configure('templates', { autoescape: true });
 
-const articlesDir = 'articles';
-const postsDir = 'posts';
-const indexPath = 'index.html';
+const ARTICLES_DIR = 'articles';
+const OUTPUT_DIR = 'dist';
+const ARTICLES_PER_PAGE = 10;
 
-const allArticles = [];
-
-fs.mkdirSync(postsDir, { recursive: true });
-
-const files = fs.readdirSync(articlesDir)
-  .filter(f => f.endsWith('.md'))
-  .sort()
-  .reverse();
-
-for (const file of files) {
-  const filePath = path.join(articlesDir, file);
-  const raw = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(raw);
-  const htmlContent = marked(content);
-
-  const filename = path.basename(file, '.md');
-  const [year, month, day, ...slugParts] = filename.split('-');
-  const slug = slugParts.join('-');
-  const outputPath = path.join(postsDir, `${year}/${month}/${slug}.html`);
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-
-  const html = nunjucks.render('post.html', {
-    title: data.title,
-    date: `${year}/${month}/${day}`,
-    content: htmlContent
-  });
-
-  fs.writeFileSync(outputPath, html);
-
-  allArticles.push({
-    title: data.title,
-    date: `${year}/${month}/${day}`,
-    content: htmlContent,
-    url: `/posts/${year}/${month}/${slug}.html`
-  });
+function generateSlug(filePath) {
+  const { name } = path.parse(filePath);
+  return name;
 }
 
-const indexHtml = nunjucks.render('index.html', { articles: allArticles });
-fs.writeFileSync(indexPath, indexHtml);
+function loadArticles() {
+  const files = fs.readdirSync(ARTICLES_DIR);
+  const articles = files
+    .filter(file => file.endsWith('.md'))
+    .map(file => {
+      const content = fs.readFileSync(path.join(ARTICLES_DIR, file), 'utf-8');
+      const { data, content: body } = matter(content);
+      const slug = generateSlug(file);
+      return {
+        ...data,
+        body: marked.parse(body),
+        slug
+      };
+    });
+
+  articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+  return articles;
+}
+
+function generatePostPages(articles) {
+  for (const article of articles) {
+    const filePath = path.join(
+      OUTPUT_DIR,
+      'posts',
+      article.date.slice(0, 4),
+      article.date.slice(5, 7),
+      `${article.slug}.html`
+    );
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    const html = nunjucks.render('post.njk', { article });
+    fs.writeFileSync(filePath, html);
+  }
+}
+
+function generateIndexPages(articles) {
+  const totalPages = Math.ceil(articles.length / ARTICLES_PER_PAGE);
+
+  for (let page = 1; page <= totalPages; page++) {
+    const start = (page - 1) * ARTICLES_PER_PAGE;
+    const end = page * ARTICLES_PER_PAGE;
+    const articlesSubset = articles.slice(start, end);
+    const html = nunjucks.render('index.njk', {
+      articles: articlesSubset,
+      currentPage: page,
+      totalPages
+    });
+    const filePath =
+      page === 1
+        ? path.join(OUTPUT_DIR, 'index.html')
+        : path.join(OUTPUT_DIR, 'page', String(page), 'index.html');
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, html);
+  }
+}
+
+function main() {
+  const articles = loadArticles();
+  generatePostPages(articles);
+  generateIndexPages(articles);
+}
+
+main();
