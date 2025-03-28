@@ -16,4 +16,20 @@
       </div>
     </article>
   {% endfor %}
+
+  {% if totalPages > 1 %}
+    <div class="pagination">
+      {% if currentPage > 1 %}
+        {% if currentPage == 2 %}
+          <a href="/">&laquo; Prev</a>
+        {% else %}
+          <a href="/page/{{ currentPage - 1 }}/">&laquo; Prev</a>
+        {% endif %}
+      {% endif %}
+
+      {% if currentPage < totalPages %}
+        <a href="/page/{{ currentPage + 1 }}/">Next &raquo;</a>
+      {% endif %}
+    </div>
+  {% endif %}
 {% endblock %}
