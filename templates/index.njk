@@ -7,13 +7,26 @@
     <article class="article-card">
       <h2 class="article-title">
         <a href="{{ article.url }}">{{ article.title }}</a>
+          {{ article.title }}
+        </a>
       </h2>
       <div class="article-body">
-        {{ article.content | safe }}
+        {{ article.body | safe }}
       </div>
       <div class="article-date">
         Date: {{ article.date }}
       </div>
     </article>
   {% endfor %}
+
+  {% if totalPages > 1 %}
+    <div class="pagination">
+      {% if currentPage > 1 %}
+        <a href="{{ currentPage == 2 ? '/' : '/page/' ~ (currentPage - 1) ~ '/' }}">&laquo; Prev</a>
+      {% endif %}
+      {% if currentPage < totalPages %}
+        <a href="/page/{{ currentPage + 1 }}/">Next &raquo;</a>
+      {% endif %}
+    </div>
+  {% endif %}
 {% endblock %}
