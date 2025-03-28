@@ -32,7 +32,7 @@ function loadArticles() {
         ...data,
         date,
         slug,
-        url: `posts/${date.slice(0, 4)}/${date.slice(5, 7)}/${slug}.html`,
+        url: `/posts/${date.slice(0, 4)}/${date.slice(5, 7)}/${slug}.html`,
         body: marked.parse(body)
       };
     });
