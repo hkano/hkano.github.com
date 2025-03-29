@@ -55,9 +55,7 @@ function generatePostPages(articles) {
     const [year, month] = article.date.split('-');
     const filePath = path.join(OUTPUT_DIR, 'posts', year, month, `${article.slug}.html`);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    const metaDescription =
-      article.description ||
-      article.body.replace(/<[^>]+>/g, '').slice(0, 120).replace(/\s+/g, ' ').trim();
+    const metaDescription = article.description || `${article.title}｜` + article.body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
     const html = nunjucks.render('post.njk', {
       article,
       meta_description: metaDescription,
