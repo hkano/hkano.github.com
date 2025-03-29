@@ -65,6 +65,13 @@ a:hover {
   padding-right: 0.5rem; 
 }
 
+.site-title .dotcom {
+  display: inline-block;
+  font-size: 2.5rem;
+  color: #f33;
+  padding-top: 0.25rem;
+}
+
 .site-nav {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
@@ -88,11 +95,6 @@ a:hover {
   margin-bottom: 0;
 }
 
-.site-title .dotcom {
-  font-size: 1.5rem;
-  color: #b22222;
-}
-
 .article-body img {
   display: block;
   width: 100%;
@@ -109,7 +111,6 @@ a:hover {
 
 .article-date {
   font-size: 1.25rem;
-  font-weight: bold;
   color: #666;
   text-align: left;
   margin-top: 0.5rem;
