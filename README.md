@@ -18,9 +18,16 @@ Each article uses [frontmatter](https://github.com/jonschlinkert/gray-matter) fo
 ```markdown
 ---
 title: "My First Post"
+description: "A short summary of the article content, used for SEO and previews."
 ---
 This is the body text in **Markdown**.
 ```
+
+- `title` is required.
+- `description` is optional.
+  - It is used as the `<meta name="description">` for SEO and social media.
+  - Keep it under 120 characters.
+  - Use plain text only (no Markdown or HTML).
 
 ## 🛠️ Generating HTML
 
@@ -37,6 +44,15 @@ This will:
 - Generate redirect pages for each `/posts/YYYY/MM/` month (from 2009 to current)
 - Generate a redirect for `/page/` to point back to the homepage
 - Copy all files from `static/` into `docs/`
+
+## 🔖 SEO Meta Description
+
+Each generated page includes a `<meta name="description">` tag for better search engine visibility.
+
+- Article pages automatically generate descriptions using the article's title and the beginning of its content.
+- Paginated index pages use a consistent description format that includes the page number.
+
+This helps prevent duplicate metadata and improves how content appears in search engine results.
 
 ## ✅ Markdown Lint
 
