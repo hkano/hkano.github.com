@@ -98,9 +98,12 @@ a:hover {
   margin: 0.5rem auto;
 }
 
+.article-body a {
+  color: #666;
+}
+
 .article-date {
   font-size: 1.25rem;
-  color: #666;
   text-align: left;
   margin-top: 0.5rem;
 }
