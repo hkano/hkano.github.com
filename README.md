@@ -38,6 +38,13 @@ This will:
 - Generate a redirect for `/page/` to point back to the homepage
 - Copy all files from `static/` into `docs/`
 
+## ✅ Markdown Lint
+
+This repository uses [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2) via GitHub Actions.  
+It automatically checks for common Markdown issues in the `articles/` directory on each push and pull request.
+
+Configuration: `.github/workflows/markdown-lint.yml`
+
 ## 🧩 Directory Structure
 
 ```
@@ -49,7 +56,8 @@ This will:
 │   └── generate.cjs     # Generator script
 ├── docs/                # GitHub Pages output (generated)
 └── .github/workflows/
-    └── generate-blog.yml  # Auto-generation workflow
+    ├── generate-blog.yml  # Auto-generation workflow
+    └── markdown-lint.yml  # Markdown syntax checker
 ```
 
 ## 🚀 Deployment
