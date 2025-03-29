@@ -88,6 +88,11 @@ a:hover {
   margin-bottom: 0;
 }
 
+.site-title .dotcom {
+  font-size: 1.5rem;
+  color: #b22222;
+}
+
 .article-body img {
   display: block;
   width: 100%;
@@ -99,12 +104,13 @@ a:hover {
 }
 
 .article-body a {
-  color: #666;
+  text-decoration: underline;
 }
 
 .article-date {
   font-size: 1.25rem;
   font-weight: bold;
+  color: #666;
   text-align: left;
   margin-top: 0.5rem;
 }
@@ -155,7 +161,7 @@ a:hover {
 
 footer#foot {
   font-size: 1.25rem;
-  color: #999;
+  color: #333;
   text-align: center;
   margin-top: 2rem;
   padding-bottom: 2rem;
