@@ -31,12 +31,18 @@ function loadArticles() {
       const { data, content } = matter(raw);
       const { date, slug } = generateDateAndSlug(file);
       const [year, month] = date.split('-');
+      let html = marked.parse(content);
+      html = html.replace(/<img([^>]*?)>/g, (match, attrs) => {
+        return /loading=/.test(attrs)
+          ? `<img${attrs}>`
+          : `<img${attrs} loading="lazy">`;
+      });
       return {
         title: data.title || 'Untitled',
         date,
         slug,
         url: `/posts/${year}/${month}/${slug}.html`,
-        body: marked.parse(content),
+      body: html,
       };
     });
   articles.sort((a, b) => new Date(b.date) - new Date(a.date));
