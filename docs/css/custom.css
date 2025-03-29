@@ -66,11 +66,9 @@ a:hover {
 }
 
 .site-title .dotcom {
-  display: inline-block;
   font-size: 2.5rem;
-  font-family: 'Arial Rounded MT Bold', 'Hiragino Maru Gothic Pro', 'Segoe UI Rounded', sans-serif;
+  font-family: 'Arial Rounded MT Bold', 'Segoe UI Rounded', 'Hiragino Maru Gothic Pro', 'Noto Sans Rounded', sans-serif;
   color: #f33;
-  vertical-align: -0.1rem;
   line-height: 1;
 }
 
