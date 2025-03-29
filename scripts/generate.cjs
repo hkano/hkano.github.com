@@ -110,7 +110,7 @@ function copyStaticAssets() {
 function generateDateAndSlug(fileName) {
   const name = path.parse(fileName).name;
   const [year, month, day, ...slugParts] = name.split('-');
-  const date = `${year}/${month}/${day}`;
+  const date = `${year}-${month}-${day}`;
   const slug = slugParts.join('-');
   return { date, slug };
 }
