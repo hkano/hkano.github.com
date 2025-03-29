@@ -9,7 +9,7 @@
       {{ article.body | safe }}
     </div>
     <div class="article-date">
-      Date: {{ article.date }}
+      Date: {{ article.date | replace("-", "/") }}
     </div>
   </article>
 {% endblock %}
