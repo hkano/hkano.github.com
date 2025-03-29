@@ -49,12 +49,12 @@ Configuration: `.github/workflows/markdown-lint.yml`
 
 ```
 .
-├── articles/            # Markdown articles
-├── static/              # Static assets (css, images, favicon, etc.)
-├── templates/           # Nunjucks templates
+├── articles/              # Markdown articles
+├── static/                # Static assets (css, images, favicon, etc.)
+├── templates/             # Nunjucks templates
 ├── scripts/
-│   └── generate.cjs     # Generator script
-├── docs/                # GitHub Pages output (generated)
+│   └── generate.cjs       # Generator script
+├── docs/                  # GitHub Pages output (generated)
 └── .github/workflows/
     ├── generate-blog.yml  # Auto-generation workflow
     └── markdown-lint.yml  # Markdown syntax checker
