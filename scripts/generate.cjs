@@ -11,6 +11,7 @@ const OUTPUT_DIR = 'docs';
 const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
+const DEFAULT_META_DESCRIPTION = 'hkano.com は旅・技術・日々の出来事について綴った個人ブログです。';
 
 function main() {
   const articles = loadArticles();
@@ -54,7 +55,13 @@ function generatePostPages(articles) {
     const [year, month] = article.date.split('-');
     const filePath = path.join(OUTPUT_DIR, 'posts', year, month, `${article.slug}.html`);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    const html = nunjucks.render('post.njk', { article });
+    const metaDescription =
+      article.description ||
+      article.body.replace(/<[^>]+>/g, '').slice(0, 120).replace(/\s+/g, ' ').trim();
+    const html = nunjucks.render('post.njk', {
+      article,
+      meta_description: metaDescription,
+    });
     fs.writeFileSync(filePath, html);
   });
 }
@@ -65,10 +72,15 @@ function generateIndexPages(articles) {
     const start = (page - 1) * ARTICLES_PER_PAGE;
     const end = page * ARTICLES_PER_PAGE;
     const articlesSubset = articles.slice(start, end);
+    const description =
+      page === 1
+        ? DEFAULT_META_DESCRIPTION
+        : `ページ ${page}｜${DEFAULT_META_DESCRIPTION}`;
     const html = nunjucks.render('index.njk', {
       articles: articlesSubset,
       currentPage: page,
       totalPages,
+      meta_description: description,
     });
     const filePath = page === 1
       ? path.join(OUTPUT_DIR, 'index.html')
