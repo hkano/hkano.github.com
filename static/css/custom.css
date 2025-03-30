@@ -50,8 +50,8 @@ a:hover {
 
 .site-logo {
   display: block;
+  width: 64px;
   height: 64px;
-  width: auto;
 }
 
 .site-title {
@@ -62,8 +62,13 @@ a:hover {
   line-height: 1;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem; 
-  padding-right: 0.5rem; 
+  gap: 0.25rem;
+  padding-right: 0.5rem;
+}
+
+.site-name {
+  display: inline-flex;
+  align-items: baseline;
 }
 
 .site-title .dotcom {
