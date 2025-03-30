@@ -7,7 +7,7 @@ const nunjucks = require('nunjucks');
 nunjucks.configure('templates', { autoescape: true });
 
 const ARTICLES_DIR = 'articles';
-const OUTPUT_DIR = '.';
+const BUILD_DIR = 'build';
 const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
@@ -53,7 +53,7 @@ function loadArticles() {
 function generatePostPages(articles) {
   articles.forEach(article => {
     const [year, month] = article.date.split('-');
-    const filePath = path.join(OUTPUT_DIR, 'posts', year, month, `${article.slug}.html`);
+    const filePath = path.join(BUILD_DIR, 'posts', year, month, `${article.slug}.html`);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     const metaDescription = article.description || `${article.title}｜` + article.body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
     const html = nunjucks.render('post.njk', {
@@ -81,21 +81,21 @@ function generateIndexPages(articles) {
       meta_description: description,
     });
     const filePath = page === 1
-      ? path.join(OUTPUT_DIR, 'index.html')
-      : path.join(OUTPUT_DIR, 'page', String(page), 'index.html');
+      ? path.join(BUILD_DIR, 'index.html')
+      : path.join(BUILD_DIR, 'page', String(page), 'index.html');
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, html);
   }
 }
 
 function generatePageDirectoriesRedirect() {
-  const dir = path.join(OUTPUT_DIR, 'page');
+  const dir = path.join(BUILD_DIR, 'page');
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), generateRedirectHtml('/'));
 }
 
 function generatePostsDirectoriesRedirect(articles) {
-  const postsRoot = path.join(OUTPUT_DIR, 'posts');
+  const postsRoot = path.join(BUILD_DIR, 'posts');
   fs.mkdirSync(postsRoot, { recursive: true });
   fs.writeFileSync(path.join(postsRoot, 'index.html'), generateRedirectHtml('/'));
 
@@ -119,7 +119,7 @@ function generatePostsDirectoriesRedirect(articles) {
 function copyStaticAssets() {
   const staticDir = path.join(process.cwd(), STATIC_DIR);
   if (fs.existsSync(staticDir)) {
-    fs.cpSync(staticDir, OUTPUT_DIR, { recursive: true });
+    fs.cpSync(staticDir, BUILD_DIR, { recursive: true });
   }
 }
 
