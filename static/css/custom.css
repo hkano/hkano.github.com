@@ -56,9 +56,6 @@ a:hover {
 
 .site-title {
   display: inline-flex;
-  font-size: 3rem;
-  font-weight: bold;
-  color: inherit;
   line-height: 1;
   align-items: center;
   justify-content: center;
@@ -68,6 +65,9 @@ a:hover {
 
 .site-name {
   display: inline-flex;
+  font-size: 3rem;
+  font-weight: bold;
+  color: inherit;
   align-items: baseline;
 }
 
