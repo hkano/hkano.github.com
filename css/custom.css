@@ -1,0 +1,175 @@
+html {
+  font-size: 100%;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  background: #fff;
+}
+
+body {
+  font-size: 1.25rem;
+  color: #333;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.site-header {
+  text-align: center;
+  line-height: 1;
+  margin: 1rem 0;
+}
+
+.site-brand {
+  margin-bottom: 2rem;
+}
+
+.site-brand a {
+  text-decoration: none;
+}
+
+.site-brand a:hover {
+  opacity: 0.75;
+}
+
+.site-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.site-title {
+  display: inline-flex;
+  line-height: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding-right: 0.5rem;
+}
+
+.site-name {
+  display: inline-flex;
+  font-size: 3rem;
+  font-weight: bold;
+  color: inherit;
+  align-items: baseline;
+}
+
+.site-title .dotcom {
+  display: inline-block;
+  font-size: 2.5rem;
+  font-family: 'Arial Rounded MT Bold', 'Segoe UI Rounded', 'Hiragino Maru Gothic Pro', 'Noto Sans Rounded', sans-serif;
+  color: #f33;
+}
+
+.site-nav {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.site-nav a {
+  color: inherit;
+  margin: 0 0.25rem;
+}
+
+.article-card {
+  padding: 2rem 0;
+}
+
+.article-title,
+.article-title a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.article-body img {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  margin: 0.5rem auto;
+}
+
+.article-body a {
+  text-decoration: underline;
+}
+
+.article-date {
+  font-size: 1.25rem;
+  color: #666;
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+
+.pagination-link,
+.pagination-ellipsis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  margin: 0 0.35rem;
+  text-decoration: none;
+}
+
+.pagination-link {
+  color: #666 !important;
+  background: #fff;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1), 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.pagination-link:hover {
+  color: #fff !important;
+  background: #999;
+  text-decoration: none;
+}
+
+.pagination-link.is-current {
+  color: #fff !important;
+  background: #666;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.pagination-ellipsis {
+  color: #999;
+  pointer-events: none;
+}
+
+footer#foot {
+  font-size: 1.25rem;
+  color: #333;
+  text-align: center;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
