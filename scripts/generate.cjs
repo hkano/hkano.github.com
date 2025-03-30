@@ -7,7 +7,7 @@ const nunjucks = require('nunjucks');
 nunjucks.configure('templates', { autoescape: true });
 
 const ARTICLES_DIR = 'articles';
-const OUTPUT_DIR = 'docs';
+const OUTPUT_DIR = '.';
 const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
