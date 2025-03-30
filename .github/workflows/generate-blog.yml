@@ -58,8 +58,10 @@ jobs:
       - name: Copy generated files to .gh-pages
         run: cp -r build/* .gh-pages/
 
-      - name: Add .nojekyll
-        run: touch .gh-pages/.nojekyll
+      - name: Add CNAME and .nojekyll
+        run: |
+          echo "hkano.com" > .gh-pages/CNAME
+          touch .gh-pages/.nojekyll
 
       - name: Commit and push to gh-pages
         run: |
