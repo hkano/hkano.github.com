@@ -1,0 +1,35 @@
+{% extends "layout.njk" %}
+
+{% block title %}hkano.com{% endblock %}
+
+{% block content %}
+  {% for article in articles %}
+    <article class="article-card">
+      <h2 class="article-title">
+        <a href="{{ article.url }}">{{ article.title }}</a>
+      </h2>
+      <div class="article-body">
+        {{ article.body | safe }}
+      </div>
+      <div class="article-date">
+        Date: {{ article.date }}
+      </div>
+    </article>
+  {% endfor %}
+
+  {% if totalPages > 1 %}
+    <div class="pagination">
+      {% if currentPage > 1 %}
+        {% if currentPage == 2 %}
+          <a href="/">&laquo; Prev</a>
+        {% else %}
+          <a href="/page/{{ currentPage - 1 }}/">&laquo; Prev</a>
+        {% endif %}
+      {% endif %}
+
+      {% if currentPage < totalPages %}
+        <a href="/page/{{ currentPage + 1 }}/">Next &raquo;</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "layout.njk" %}
+
+{% block title %}{{ article.title }} | hkano.com{% endblock %}
+
+{% block content %}
+  <article class="article-card">
+    <h2 class="article-title">{{ article.title }}</h2>
+    <div class="article-body">
+      {{ article.body | safe }}
+    </div>
+    <div class="article-date">
+      Date: {{ article.date }}
+    </div>
+  </article>
+{% endblock %}
