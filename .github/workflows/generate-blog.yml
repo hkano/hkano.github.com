@@ -47,20 +47,23 @@ jobs:
       - name: Generate blog into build directory
         run: node scripts/generate.cjs
 
-      - name: Switch to gh-pages branch
+      - name: Prepare .gh-pages worktree
         run: |
           git fetch origin gh-pages
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf . || true
+          git worktree add .gh-pages gh-pages
 
-      - name: Copy generated files into root
-        run: cp -r build/* .
+      - name: Clear .gh-pages contents
+        run: rm -rf .gh-pages/*
+
+      - name: Copy generated files to .gh-pages
+        run: cp -r build/* .gh-pages/
 
       - name: Add .nojekyll
-        run: touch .nojekyll
+        run: touch .gh-pages/.nojekyll
 
       - name: Commit and push to gh-pages
         run: |
+          cd .gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
