@@ -39,11 +39,11 @@ node scripts/generate.cjs
 
 This will:
 - Parse all Markdown in `articles/`
-- Generate individual pages in `docs/posts/YYYY/MM/slug.html`
+- Generate individual pages in `build/posts/YYYY/MM/slug.html`
 - Generate paginated `index.html` pages
 - Generate redirect pages for each `/posts/YYYY/MM/` month (from 2009 to current)
 - Generate a redirect for `/page/` to point back to the homepage
-- Copy all files from `static/` into `docs/`
+- Copy all files from `static/` into `build/`
 
 ## 🔖 SEO Meta Description
 
@@ -71,7 +71,7 @@ Some default rules (e.g. `MD013` for line length, `MD033` for `<br>`, and `MD036
 ├── templates/             # Nunjucks templates
 ├── scripts/
 │   └── generate.cjs       # Generator script
-├── docs/                  # GitHub Pages output (generated)
+├── build/                 # Build output (temporary, pushed to gh-pages for deployment)
 └── .github/workflows/
     └── generate-blog.yml  # Markdown Lint + Auto-generation workflow
 ```
@@ -79,8 +79,8 @@ Some default rules (e.g. `MD013` for line length, `MD033` for `<br>`, and `MD036
 ## 🚀 Deployment
 
 This site is deployed via [GitHub Pages](https://pages.github.com/).  
-All content is served from the `docs/` directory.  
-GitHub Actions runs `scripts/generate.cjs` on every push and commits the result.
+All content is published from the `gh-pages` branch.  
+GitHub Actions runs `scripts/generate.cjs` on every push, generates HTML into the `build/` directory, and pushes its contents to `gh-pages`.
 
 You can also trigger the generator manually via the **Actions** tab.
 
