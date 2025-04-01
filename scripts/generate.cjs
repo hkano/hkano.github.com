@@ -32,18 +32,12 @@ function loadArticles() {
       const { data, content } = matter(raw);
       const { date, slug } = generateDateAndSlug(file);
       const [year, month] = date.split('-');
-      let html = marked.parse(content);
-      html = html.replace(/<img([^>]*?)>/g, (match, attrs) => {
-        return /loading=/.test(attrs)
-          ? `<img${attrs}>`
-          : `<img${attrs} loading="lazy">`;
-      });
       return {
         title: data.title || 'Untitled',
         date,
         slug,
         url: `/posts/${year}/${month}/${slug}.html`,
-      body: html,
+      body: marked.parse(content),
       };
     });
   articles.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -69,7 +63,17 @@ function generateIndexPages(articles) {
   for (let page = 1; page <= totalPages; page++) {
     const start = (page - 1) * ARTICLES_PER_PAGE;
     const end = page * ARTICLES_PER_PAGE;
-    const articlesSubset = articles.slice(start, end);
+    const articlesSubset = articles.slice(start, end).map((article, i) => {
+      let body = article.body;
+      if (i !== 0) {
+        body = body.replace(/<img([^>]*?)>/g, (match, attrs) => {
+          return /loading=/.test(attrs)
+            ? `<img${attrs}>`
+            : `<img${attrs} loading="lazy">`;
+        });
+      }
+      return { ...article, body };
+    });
     const description =
       page === 1
         ? DEFAULT_META_DESCRIPTION
