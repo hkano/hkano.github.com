@@ -49,7 +49,8 @@ function generatePostPages(articles) {
     const [year, month] = article.date.split('-');
     const filePath = path.join(BUILD_DIR, 'posts', year, month, `${article.slug}.html`);
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    const metaDescription = article.description || `${article.title}｜` + article.body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
+    const body = convertImgToPicture(article.body);
+    const metaDescription = article.description || `${article.title}｜` + body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
     const html = nunjucks.render('post.njk', {
       article,
       meta_description: metaDescription,
@@ -72,6 +73,7 @@ function generateIndexPages(articles) {
             : `<img${attrs} loading="lazy">`;
         });
       }
+      body = convertImgToPicture(body);
       return { ...article, body };
     });
     const description =
@@ -133,6 +135,21 @@ function generateDateAndSlug(fileName) {
   const date = `${year}-${month}-${day}`;
   const slug = slugParts.join('-');
   return { date, slug };
+}
+
+function convertImgToPicture(html) {
+  return html.replace(
+    /<img([^>]*?)src="([^"]+)\.(jpg|jpeg|png)"([^>]*)>/gi,
+    (match, before, base, ext, after) => {
+      const webpSrc = `${base}.webp`;
+      const originalSrc = `${base}.${ext}`;
+      return `
+<picture>
+  <source srcset="${webpSrc}" type="image/webp">
+  <img${before}src="${originalSrc}"${after}>
+</picture>`.trim();
+    }
+  );
 }
 
 function generateRedirectHtml(target = '/') {
