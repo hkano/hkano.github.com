@@ -41,15 +41,20 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install cwebp
+        run: sudo apt-get update && sudo apt-get install -y webp
+
       - name: Install dependencies
         run: npm ci
 
       - name: Generate blog into build directory
         run: node scripts/generate.cjs
 
-      - name: Generate WebP images
+      - name: Convert images to WebP
         run: |
-          npx imagemin build/**/*.{jpg,jpeg,png} --plugin=webp --out-dir=build
+          find build -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) | while read img; do
+            cwebp -quiet "$img" -o "${img%.*}.webp"
+          done
 
       - name: Prepare .gh-pages worktree
         run: |
