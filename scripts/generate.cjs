@@ -48,9 +48,9 @@ function generatePostPages(articles) {
   articles.forEach(article => {
     const [year, month] = article.date.split('-');
     const filePath = path.join(BUILD_DIR, 'posts', year, month, `${article.slug}.html`);
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    const body = convertImgToPicture(article.body);
-    const metaDescription = article.description || `${article.title}｜` + body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });  
+    const metaDescription = article.description || `${article.title}｜` + article.body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
+    article.body = convertImgToPicture(article.body);
     const html = nunjucks.render('post.njk', {
       article,
       meta_description: metaDescription,
