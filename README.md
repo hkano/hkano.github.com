@@ -44,6 +44,7 @@ This will:
 - Generate redirect pages for each `/posts/YYYY/MM/` month (from 2009 to current)
 - Generate a redirect for `/page/` to point back to the homepage
 - Copy all files from `static/` into `build/`
+- Optimize image loading behavior for performance
 
 ## 🔖 SEO Meta Description
 
