@@ -47,6 +47,10 @@ jobs:
       - name: Generate blog into build directory
         run: node scripts/generate.cjs
 
+      - name: Generate WebP images
+        run: |
+          npx imagemin build/**/*.{jpg,jpeg,png} --plugin=webp --out-dir=build
+
       - name: Prepare .gh-pages worktree
         run: |
           git fetch origin gh-pages
