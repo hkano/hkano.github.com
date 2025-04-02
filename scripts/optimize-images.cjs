@@ -3,7 +3,8 @@ const path = require('path');
 const glob = require('glob');
 const sharp = require('sharp');
 
-const INPUT_DIR = path.join('build', 'images');
+const INPUT_DIR = path.join('static', 'images');
+const OUTPUT_DIR = path.join('build', 'images');
 const MAX_WIDTH = 800;
 
 async function optimizeImages() {
@@ -11,19 +12,18 @@ async function optimizeImages() {
 
   await Promise.all(
     files.map(async (inputPath) => {
-      const ext = path.extname(inputPath);
-      const webpPath = inputPath.replace(ext, '.webp');
+      const relPath = path.relative(INPUT_DIR, inputPath);
+      const outputJpg = path.join(OUTPUT_DIR, relPath);
+      const outputWebP = outputJpg.replace(path.extname(outputJpg), '.webp');
 
-      const image = sharp(inputPath);
-      const metadata = await image.metadata();
+      const image = sharp(inputPath).resize({
+        width: MAX_WIDTH,
+        withoutEnlargement: true,
+      });
 
-      if (metadata.width > MAX_WIDTH) {
-        await image
-          .resize({ width: MAX_WIDTH, withoutEnlargement: true })
-          .toFile(inputPath);
-      }
-
-      await sharp(inputPath).toFile(webpPath);
+      await fs.ensureDir(path.dirname(outputJpg));
+      await image.toFile(outputJpg);
+      await image.toFormat('webp').toFile(outputWebP);
     })
   );
 }
