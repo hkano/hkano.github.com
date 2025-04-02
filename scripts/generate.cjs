@@ -13,6 +13,14 @@ const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
 const DEFAULT_META_DESCRIPTION = 'hkano.com は旅・技術・日々の出来事について綴った個人ブログです。';
 
+const renderer = {
+  image(href, title, text) {
+    const alt = text || '';
+    return `<img src="${href}" alt="${alt}" width="800" height="600">`;
+  }
+};
+marked.setOptions({ renderer });
+
 function main() {
   const articles = loadArticles();
   generatePostPages(articles);
@@ -37,7 +45,7 @@ function loadArticles() {
         date,
         slug,
         url: `/posts/${year}/${month}/${slug}.html`,
-      body: marked.parse(content),
+        body: marked.parse(content),
       };
     });
   articles.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -146,14 +154,12 @@ function convertImgToPicture(html) {
       const webp400Src = `${base}-400.webp`;
 
       const isTarget = /^\d{4}-\d{2}-\d{2}-.+/.test(path.basename(base));
-      if (!isTarget) {
-        return match;
-      }
+      if (!isTarget) return match;
 
       return `
 <picture>
-  <source type="image/webp" srcset="${webp400Src} 400w, ${webpSrc} 800w" sizes="100vw">
-  <img${before}src="${originalSrc}" width="800" height="600"${after}>
+  <source type="image/webp" srcset="${webp400Src} 400w, ${webpSrc} 800w" sizes="(max-width: 600px) 100vw, 800px">
+  <img${before}src="${originalSrc}"${after}>
 </picture>`.trim();
     }
   );
