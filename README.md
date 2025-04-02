@@ -60,7 +60,7 @@ All `<img>` tags in article HTML are automatically wrapped in `<picture>` elemen
 ```html
 <picture>
   <source type="image/webp" srcset="/images/photo-400.webp 400w, /images/photo.webp 800w" sizes="100vw">
-  <img src="/images/photo.jpg" width="800" height="600" alt="..." loading="lazy">
+  <img src="/images/photo.jpg" alt="..." width="800" height="600" loading="lazy">
 </picture>
 ```
 
