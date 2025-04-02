@@ -44,23 +44,28 @@ This will:
 - Generate redirect pages for each `/posts/YYYY/MM/` month (from 2009 to current)
 - Generate a redirect for `/page/` to point back to the homepage
 - Copy all files from `static/` into `build/`
-- Optimize image loading behavior for performance
+- Optimize image loading behavior and inject <picture> tags for responsive images
 
 ## 📷 Image Optimization
 
-During generation, `.jpg`, `.jpeg`, and `.png` images in the `static/` directory are automatically converted to `.webp` using [imagemin](https://github.com/imagemin/imagemin) via GitHub Actions.
+During the build process, `.jpg`, `.jpeg`, and `.png` images in the `static/images/` directory are automatically resized and optimized using [Sharp](https://sharp.pixelplumbing.com/) via GitHub Actions.
 
-All `<img>` tags in article HTML are wrapped in `<picture>` elements to prefer WebP when supported.
+- Images are resized to a **maximum width of 800px**
+- A smaller 400px version is also generated for responsive display
+- A `.webp` version is created for each size
+- The original image is preserved as a fallback
+
+All `<img>` tags in article HTML are automatically wrapped in `<picture>` elements to prefer WebP when supported:
 
 ```html
 <picture>
-  <source srcset="/images/photo.webp" type="image/webp">
-  <img src="/images/photo.jpg" alt="..." loading="lazy">
+  <source type="image/webp" srcset="/images/photo-400.webp 400w, /images/photo.webp 800w" sizes="100vw">
+  <img src="/images/photo.jpg" width="800" height="600" alt="..." loading="lazy">
 </picture>
 ```
 
-This ensures modern image optimization with backward compatibility.  
-The conversion is fully automated as part of the generation process via GitHub Actions.
+This provides responsive, optimized images for modern browsers while retaining compatibility.
+The optimization is fully automated as part of the GitHub Actions workflow.
 
 ## 🎨 CSS Optimization
 
@@ -87,14 +92,15 @@ Some default rules (e.g. `MD013` for line length, `MD033` for `<br>`, and `MD036
 
 ```
 .
-├── articles/              # Markdown articles
-├── static/                # Static assets (css, images, favicon, etc.)
-├── templates/             # Nunjucks templates
+├── articles/                # Markdown articles
+├── static/                  # Static assets (css, images, favicon, etc.)
+├── templates/               # Nunjucks templates
 ├── scripts/
-│   └── generate.cjs       # Generator script
-├── build/                 # Build output (temporary, pushed to gh-pages for deployment)
+│   ├── generate.cjs         # HTML generator script
+│   └── optimize-images.cjs  # Image optimization script (resize + WebP)
+├── build/                   # Build output (temporary, pushed to gh-pages for deployment)
 └── .github/workflows/
-    └── generate-blog.yml  # Markdown Lint + Auto-generation workflow
+    └── generate-blog.yml    # Markdown Lint + Auto-generation workflow
 ```
 
 ## 🚀 Deployment
