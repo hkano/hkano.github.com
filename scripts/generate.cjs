@@ -1,7 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-const { marked } = require('marked');
+const { marked, Renderer } = require('marked');
+
+class CustomRenderer extends Renderer {
+  image(href, title, text) {
+    const alt = text || '';
+    return `<img src="${href}" alt="${alt}" width="800" height="600">`;
+  }
+}
+marked.setOptions({ renderer: new CustomRenderer() });
+
 const nunjucks = require('nunjucks');
 
 nunjucks.configure('templates', { autoescape: true });
@@ -12,14 +21,6 @@ const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
 const DEFAULT_META_DESCRIPTION = 'hkano.com は旅・技術・日々の出来事について綴った個人ブログです。';
-
-const renderer = {
-  image(href, title, text) {
-    const alt = text || '';
-    return `<img src="${href}" alt="${alt}" width="800" height="600">`;
-  }
-};
-marked.setOptions({ renderer });
 
 function main() {
   const articles = loadArticles();
