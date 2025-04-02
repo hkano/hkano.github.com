@@ -79,7 +79,7 @@ function generateIndexPages(articles) {
         body = body.replace(/<img([^>]*?)>/g, (match, attrs) => {
           return /loading=/.test(attrs)
             ? `<img${attrs}>`
-            : `<img${attrs} loading="lazy">`;
+            : `<img${attrs} loading="lazy" decoding="async">`;
         });
       }
       body = convertImgToPicture(body);
