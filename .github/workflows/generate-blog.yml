@@ -5,6 +5,7 @@ on:
     paths:
       - 'articles/**/*.md'
       - 'scripts/generate.cjs'
+      - 'scripts/optimize-images.cjs'
       - 'static/**'
       - 'templates/**'
       - '.github/workflows/generate-blog.yml'
@@ -47,17 +48,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Resize images for optimization
-        run: node scripts/resize-images.cjs
-
       - name: Generate blog into build directory
         run: node scripts/generate.cjs
 
-      - name: Convert images to WebP
-        run: |
-          find build -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) | while read img; do
-            cwebp -quiet "$img" -o "${img%.*}.webp"
-          done
+      - name: Optimize images
+        run: node scripts/optimize-images.cjs
 
       - name: Prepare .gh-pages worktree
         run: |
