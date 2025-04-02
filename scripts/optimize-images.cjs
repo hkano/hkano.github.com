@@ -12,16 +12,18 @@ async function optimizeImages() {
   await Promise.all(
     files.map(async (inputPath) => {
       const ext = path.extname(inputPath);
-      const outputWebP = inputPath.replace(ext, '.webp');
+      const webpPath = inputPath.replace(ext, '.webp');
 
-      const { width } = await sharp(inputPath).metadata();
-      const pipeline = sharp(inputPath);
+      const image = sharp(inputPath);
+      const metadata = await image.metadata();
 
-      if (width > MAX_WIDTH) {
-        pipeline.resize({ width: MAX_WIDTH, withoutEnlargement: true });
+      if (metadata.width > MAX_WIDTH) {
+        await image
+          .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+          .toFile(inputPath);
       }
 
-      await pipeline.toFile(outputWebP);
+      await sharp(inputPath).toFile(webpPath);
     })
   );
 }
