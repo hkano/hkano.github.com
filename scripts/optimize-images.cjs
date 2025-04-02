@@ -7,8 +7,8 @@ const INPUT_DIR = path.join('static', 'images');
 const OUTPUT_DIR = path.join('build', 'images');
 const MAX_WIDTH = 800;
 const SMALL_WIDTH = 400;
-const JPEG_QUALITY = 50;
-const WEBP_QUALITY = 50;
+const JPEG_QUALITY = 75;
+const WEBP_QUALITY = 60;
 const TARGET_PATTERN = /^\d{4}-\d{2}-\d{2}-.+/;
 
 async function optimizeImages() {
