@@ -52,20 +52,22 @@ During the build process, `.jpg`, `.jpeg`, and `.png` images in the `static/imag
 
 - Images are resized to a **maximum width of 800px**
 - A smaller 400px version is also generated for responsive display
-- A `.webp` version is created for each size
+- A `.webp` version is created for each size using modern compression
 - The original image is preserved as a fallback
+- JPEGs use quality `75` and WebPs `60`, providing balanced file size and visual fidelity
 
 All `<img>` tags in article HTML are automatically wrapped in `<picture>` elements to prefer WebP when supported:
 
 ```html
 <picture>
   <source type="image/webp" srcset="/images/photo-400.webp 400w, /images/photo.webp 800w" sizes="100vw">
-  <img src="/images/photo.jpg" alt="..." width="800" height="600" loading="lazy">
+  <img src="/images/photo.jpg" alt="..." width="800" height="600" loading="lazy" decoding="async">
 </picture>
 ```
 
-This provides responsive, optimized images for modern browsers while retaining compatibility.
-The optimization is fully automated as part of the GitHub Actions workflow.
+This provides responsive, optimized images for modern browsers while retaining compatibility.  
+Image loading is optimized for performance using modern attributes and responsive sizing.  
+All transformations are handled automatically as part of the GitHub Actions workflow.
 
 ## 🎨 CSS Optimization
 
