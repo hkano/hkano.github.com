@@ -7,7 +7,7 @@ const INPUT_DIR = path.join('static', 'images');
 const OUTPUT_DIR = path.join('build', 'images');
 const MAX_WIDTH = 800;
 const SMALL_WIDTH = 400;
-const JPEG_QUALITY = 60;
+const JPEG_QUALITY = 70;
 const WEBP_QUALITY = 50;
 const TARGET_PATTERN = /^\d{4}-\d{2}-\d{2}-.+/;
 
