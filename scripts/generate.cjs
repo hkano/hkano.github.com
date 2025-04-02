@@ -141,11 +141,18 @@ function convertImgToPicture(html) {
   return html.replace(
     /<img([^>]*?)src="([^"]+)\.(jpg|jpeg|png)"([^>]*)>/gi,
     (match, before, base, ext, after) => {
-      const webpSrc = `${base}.webp`;
       const originalSrc = `${base}.${ext}`;
+      const webpSrc = `${base}.webp`;
+      const webp400Src = `${base}-400.webp`;
+
+      const isTarget = /^\d{4}-\d{2}-\d{2}-.+/.test(path.basename(base));
+      if (!isTarget) {
+        return match;
+      }
+
       return `
 <picture>
-  <source srcset="${webpSrc}" type="image/webp">
+  <source type="image/webp" srcset="${webp400Src} 400w, ${webpSrc} 800w" sizes="(max-width: 600px) 400px, 800px">
   <img${before}src="${originalSrc}"${after}>
 </picture>`.trim();
     }
