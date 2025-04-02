@@ -153,7 +153,7 @@ function convertImgToPicture(html) {
       return `
 <picture>
   <source type="image/webp" srcset="${webp400Src} 400w, ${webpSrc} 800w" sizes="100vw">
-  <img${before}src="${originalSrc}" srcset="${webpSrc400} 400w, ${webpSrc800} 800w" sizes="100vw" width="800" height="600"${after}>
+  <img${before}src="${originalSrc}" width="800" height="600"${after}>
 </picture>`.trim();
     }
   );
