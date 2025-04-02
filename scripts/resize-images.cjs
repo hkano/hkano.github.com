@@ -10,7 +10,7 @@ const OUTPUT_DIR = path.join('build', 'images');
 const MAX_WIDTH = 800;
 
 async function resizeImages() {
-  const files = glob.sync(`${INPUT_DIR}/**/*.{jpg,jpeg,png}`, { nocase: true });
+  const files = glob.sync(`${INPUT_DIR}/**/*.{jpg,jpeg,png,webp}`, { nocase: true });
 
   await Promise.all(
     files.map(async (inputPath) => {
