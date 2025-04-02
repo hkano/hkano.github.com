@@ -7,6 +7,8 @@ const INPUT_DIR = path.join('static', 'images');
 const OUTPUT_DIR = path.join('build', 'images');
 const MAX_WIDTH = 800;
 const SMALL_WIDTH = 400;
+const JPEG_QUALITY = 70;
+const WEBP_QUALITY = 60;
 const TARGET_PATTERN = /^\d{4}-\d{2}-\d{2}-.+/;
 
 async function optimizeImages() {
@@ -30,18 +32,19 @@ async function optimizeImages() {
       await image
         .clone()
         .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+        .jpeg({ quality: JPEG_QUALITY })
         .toFile(outputOriginal);
 
       await image
         .clone()
         .resize({ width: MAX_WIDTH, withoutEnlargement: true })
-        .toFormat('webp')
+        .webp({ quality: WEBP_QUALITY })
         .toFile(outputWebP);
 
       await image
         .clone()
         .resize({ width: SMALL_WIDTH, withoutEnlargement: true })
-        .toFormat('webp')
+        .webp({ quality: WEBP_QUALITY })
         .toFile(outputWebPSmall);
     })
   );
