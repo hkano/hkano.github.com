@@ -46,6 +46,26 @@ This will:
 - Copy all files from `static/` into `build/`
 - Optimize image loading behavior for performance
 
+## 📷 Image Optimization
+
+During generation, `.jpg`, `.jpeg`, and `.png` images in the `static/` directory are automatically converted to `.webp` using [imagemin](https://github.com/imagemin/imagemin) via GitHub Actions.
+
+All `<img>` tags in article HTML are wrapped in `<picture>` elements to prefer WebP when supported.
+
+```html
+<picture>
+  <source srcset="/images/photo.webp" type="image/webp">
+  <img src="/images/photo.jpg" alt="..." loading="lazy">
+</picture>
+```
+
+This ensures modern image optimization with backward compatibility.  
+The conversion is fully automated as part of the generation process via GitHub Actions.
+
+## 🎨 CSS Optimization
+
+`normalize.css` is hosted locally (`/css/normalize.min.css`) instead of using a CDN to reduce render-blocking during page load.
+
 ## 🔖 SEO Meta Description
 
 Each generated page includes a `<meta name="description">` tag for better search engine visibility.
