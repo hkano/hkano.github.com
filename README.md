@@ -113,6 +113,15 @@ GitHub Actions runs `scripts/generate.cjs` on every push, generates HTML into th
 
 You can also trigger the generator manually via the **Actions** tab.
 
+## 🌐 Domain & DNS
+
+- **Domain**: [hkano.com](https://hkano.com)  
+- **Registrar**: Amazon Route 53  
+- **DNS Hosting**: Cloudflare  
+  - All DNS records (A/CNAME/etc) are managed via Cloudflare  
+  - Cloudflare handles HTTPS (Full mode) and CDN caching  
+  - Static assets under `/css/`, `/js/`, and `/images/` are cached with a 1-year TTL
+
 ## 📄 License
 
 - Source code: [MIT License](https://opensource.org/licenses/MIT)
