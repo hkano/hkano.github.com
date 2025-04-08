@@ -98,20 +98,19 @@ function generateIndexPages(articles) {
     const filePath = page === 1
       ? path.join(BUILD_DIR, 'index.html')
       : path.join(BUILD_DIR, 'page', String(page), 'index.html');
-    fs.mkdirSync(
-      page === 1
-        ? path.join(BUILD_DIR, 'page', '1')
-        : path.dirname(filePath),
-      { recursive: true }
-    );
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, html);
   }
 }
 
 function generatePageDirectoriesRedirect() {
-  const dir = path.join(BUILD_DIR, 'page');
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), generateRedirectHtml('/'));
+  const pageRootDir = path.join(BUILD_DIR, 'page');
+  fs.mkdirSync(pageRootDir, { recursive: true });
+  fs.writeFileSync(path.join(pageRootDir, 'index.html'), generateRedirectHtml('/'));
+
+  const page1Dir = path.join(pageRootDir, '1');
+  fs.mkdirSync(page1Dir, { recursive: true });
+  fs.writeFileSync(path.join(page1Dir, 'index.html'), generateRedirectHtml('/'));
 }
 
 function generatePostsDirectoriesRedirect(articles) {
