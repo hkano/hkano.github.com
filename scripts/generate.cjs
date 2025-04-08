@@ -98,7 +98,12 @@ function generateIndexPages(articles) {
     const filePath = page === 1
       ? path.join(BUILD_DIR, 'index.html')
       : path.join(BUILD_DIR, 'page', String(page), 'index.html');
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.mkdirSync(
+      page === 1
+        ? path.join(BUILD_DIR, 'page', '1')
+        : path.dirname(filePath),
+      { recursive: true }
+    );
     fs.writeFileSync(filePath, html);
   }
 }
