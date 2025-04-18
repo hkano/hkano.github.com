@@ -57,8 +57,8 @@ function generatePostPages(articles) {
   articles.forEach(article => {
     const [year, month] = article.date.split('-');
     const filePath = path.join(BUILD_DIR, 'posts', year, month, `${article.slug}.html`);
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });  
-    const metaDescription = article.description || `${article.title}｜` + article.body.replace(/<[^>]+>/g, '').slice(0, 100).replace(/\s+/g, ' ').trim();
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    const metaDescription = article.description || generateMetaDescriptionFromArticle(article);
     const body = convertImgToPicture(article.body);
     const html = nunjucks.render('post.njk', {
       article: { ...article, body },
@@ -87,8 +87,8 @@ function generateIndexPages(articles) {
     });
     const description =
       page === 1
-        ? DEFAULT_META_DESCRIPTION
-        : `ページ ${page}｜${DEFAULT_META_DESCRIPTION}`;
+        ? `${DEFAULT_META_DESCRIPTION}${generateMetaDescriptionFromArticle(articlesSubset[0])}`
+        : `ページ ${page}｜${generateMetaDescriptionFromArticle(articlesSubset[0])}`;
     const html = nunjucks.render('index.njk', {
       articles: articlesSubset,
       currentPage: page,
@@ -148,6 +148,19 @@ function generateDateAndSlug(fileName) {
   const date = `${year}-${month}-${day}`;
   const slug = slugParts.join('-');
   return { date, slug };
+}
+
+function generateMetaDescriptionFromArticle(article) {
+  if (!article || !article.body) return '';
+  const plain = article.body.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const summary = plain.slice(0, 100);
+
+  let title = article.title.trim();
+  if (!/[。！？!?]$/.test(title)) {
+    title += '。';
+  }
+
+  return `${title}${summary}`;
 }
 
 function convertImgToPicture(html) {
