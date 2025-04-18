@@ -20,7 +20,7 @@ const BUILD_DIR = 'build';
 const STATIC_DIR = 'static';
 const ARTICLES_PER_PAGE = 10;
 const START_YEAR = 2009;
-const DEFAULT_META_DESCRIPTION = 'hkano.com は旅・技術・日々の出来事について綴った個人ブログです。';
+const DEFAULT_META_DESCRIPTION = 'hkano.com は日々の出来事について綴った個人ブログです。';
 
 function main() {
   const articles = loadArticles();
