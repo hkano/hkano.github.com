@@ -88,7 +88,7 @@ function generateIndexPages(articles) {
     const description =
       page === 1
         ? `${DEFAULT_META_DESCRIPTION}${generateMetaDescriptionFromArticle(articlesSubset[0])}`
-        : `ページ ${page}｜${generateMetaDescriptionFromArticle(articlesSubset[0])}`;
+        : `ページ ${page}｜${DEFAULT_META_DESCRIPTION}${generateMetaDescriptionFromArticle(articlesSubset[0])}`;
     const html = nunjucks.render('index.njk', {
       articles: articlesSubset,
       currentPage: page,
